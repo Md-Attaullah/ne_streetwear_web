@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NE Street Wear — Nusrat Enterprises</title>
+<meta name="description" content="Men's & kids streetwear. Wholesale and retail. Bhubaneswar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14140f;
+    --bone:#EDE8DD;
+    --tape:#E8B923;
+    --rust:#C4491D;
+    --olive:#4A5A3A;
+    --line: rgba(20,20,15,0.15);
+    --radius: 2px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bone);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3, .display{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    line-height:0.95;
+  }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+  a{color:inherit;}
+  img{display:block; max-width:100%;}
+
+  /* ---------- topbar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 20px;
+    background:var(--ink); color:var(--bone);
+    border-bottom:3px solid var(--tape);
+  }
+  .brand{ font-size:clamp(18px,3vw,24px); letter-spacing:0.03em; }
+  .brand span{color:var(--tape);}
+  .cart-btn{
+    background:var(--tape); color:var(--ink);
+    border:none; padding:9px 14px; border-radius:var(--radius);
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:13px;
+    cursor:pointer; display:flex; align-items:center; gap:6px;
+  }
+  .cart-count{
+    background:var(--ink); color:var(--tape);
+    border-radius:50%; width:20px; height:20px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:var(--ink); color:var(--bone);
+    padding:64px 20px 56px;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image: repeating-linear-gradient(-45deg, rgba(232,185,35,0.06) 0 2px, transparent 2px 22px);
+    pointer-events:none;
+  }
+  .hero-inner{ max-width:900px; margin:0 auto; position:relative; }
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono',monospace; color:var(--tape);
+    font-size:12px; letter-spacing:0.2em; text-transform:uppercase;
+    border:1px dashed var(--tape); display:inline-block;
+    padding:4px 10px; margin-bottom:18px; border-radius:var(--radius);
+  }
+  .hero h1{ font-size:clamp(42px,9vw,84px); }
+  .hero p{ margin-top:16px; max-width:520px; color:rgba(237,232,221,0.75); font-size:16px; }
+  .hero-cta{
+    margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-block; padding:13px 22px; border-radius:var(--radius);
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:13px;
+    text-decoration:none; letter-spacing:0.03em; cursor:pointer; border:none;
+  }
+  .btn-primary{ background:var(--tape); color:var(--ink); }
+  .btn-outline{ background:transparent; color:var(--bone); border:1px solid rgba(237,232,221,0.4); }
+
+  /* ---------- catalog controls ---------- */
+  .catalog{ max-width:1120px; margin:0 auto; padding:48px 20px 80px; }
+  .catalog-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    flex-wrap:wrap; gap:16px; margin-bottom:28px;
+    border-bottom:2px solid var(--ink); padding-bottom:14px;
+  }
+  .catalog-head h2{ font-size:clamp(28px,5vw,40px); }
+  .filters{ display:flex; gap:8px; flex-wrap:wrap; }
+  .filter-btn{
+    font-family:'IBM Plex Mono',monospace; font-size:12px;
+    padding:7px 12px; border:1px solid var(--ink); background:transparent;
+    border-radius:var(--radius); cursor:pointer; text-transform:uppercase;
+  }
+  .filter-btn.active{ background:var(--ink); color:var(--bone); }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(220px,1fr));
+    gap:22px;
+  }
+
+  /* ---------- product card w/ hang-tag signature ---------- */
+  .card{
+    background:#fff; border:1px dashed var(--line);
+    border-radius:var(--radius); position:relative;
+    display:flex; flex-direction:column; overflow:hidden;
+  }
+  .tag{
+    position:absolute; top:10px; left:-6px; z-index:2;
+    background:var(--olive); color:var(--bone);
+    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.08em;
+    padding:4px 10px 4px 14px; transform:rotate(-3deg);
+    box-shadow:1px 2px 3px rgba(0,0,0,0.25);
+  }
+  .tag.retail{ background:var(--rust); }
+  .tag::before{
+    content:""; position:absolute; left:4px; top:50%; transform:translateY(-50%);
+    width:4px; height:4px; border-radius:50%; background:var(--bone);
+  }
+  .card-img{
+    aspect-ratio:4/5; width:100%; object-fit:cover;
+    background:#e4dfd2;
+  }
+  .card-body{ padding:14px 14px 16px; display:flex; flex-direction:column; gap:6px; flex:1; }
+  .card-cat{ font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase; color:var(--olive); letter-spacing:0.1em; }
+  .card-name{ font-size:16px; font-weight:600; line-height:1.25; }
+  .card-desc{ font-size:12.5px; color:#5a5747; line-height:1.4; flex:1; }
+  .card-foot{ display:flex; align-items:center; justify-content:space-between; margin-top:6px; }
+  .card-price{ font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:15px; }
+  .add-btn{
+    background:var(--ink); color:var(--bone); border:none;
+    padding:8px 12px; border-radius:var(--radius); cursor:pointer;
+    font-family:'IBM Plex Mono',monospace; font-size:12px;
+  }
+  .add-btn:active{ background:var(--tape); color:var(--ink); }
+
+  .empty-state, .loading{
+    grid-column:1/-1; text-align:center; padding:60px 20px;
+    font-family:'IBM Plex Mono',monospace; color:#7a765f; font-size:13px;
+  }
+
+  /* ---------- cart drawer ---------- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(20,20,15,0.5);
+    opacity:0; pointer-events:none; transition:opacity .2s; z-index:60;
+  }
+  .overlay.open{ opacity:1; pointer-events:auto; }
+  .drawer{
+    position:fixed; top:0; right:0; height:100%; width:min(380px,92vw);
+    background:var(--bone); z-index:70;
+    transform:translateX(100%); transition:transform .25s ease;
+    display:flex; flex-direction:column;
+    box-shadow:-4px 0 18px rgba(0,0,0,0.2);
+  }
+  .drawer.open{ transform:translateX(0); }
+  .drawer-head{
+    padding:18px 20px; background:var(--ink); color:var(--bone);
+    display:flex; justify-content:space-between; align-items:center;
+    border-bottom:3px dashed var(--tape);
+  }
+  .drawer-head h3{ font-size:20px; }
+  .close-btn{ background:none; border:none; color:var(--bone); font-size:20px; cursor:pointer; }
+  .drawer-body{ flex:1; overflow-y:auto; padding:16px 20px; }
+  .cart-item{
+    display:flex; gap:10px; padding:12px 0; border-bottom:1px dashed var(--line);
+  }
+  .cart-item img{ width:54px; height:64px; object-fit:cover; border-radius:var(--radius); }
+  .cart-item-info{ flex:1; }
+  .cart-item-name{ font-size:13.5px; font-weight:600; }
+  .cart-item-meta{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:#6a6650; margin-top:2px; }
+  .qty-row{ display:flex; align-items:center; gap:8px; margin-top:6px; }
+  .qty-btn{
+    width:22px; height:22px; border:1px solid var(--ink); background:none;
+    border-radius:var(--radius); cursor:pointer; font-family:'IBM Plex Mono',monospace;
+  }
+  .remove-link{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--rust); background:none; border:none; cursor:pointer; text-decoration:underline; margin-left:auto; }
+  .drawer-foot{ padding:18px 20px; border-top:2px solid var(--ink); }
+  .total-row{ display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:16px; margin-bottom:14px; }
+  .wa-btn{
+    width:100%; background:#25D366; color:#062b14; border:none;
+    padding:14px; border-radius:var(--radius); font-family:'IBM Plex Mono',monospace;
+    font-weight:700; font-size:14px; cursor:pointer;
+  }
+  .wa-hint{ font-size:11px; color:#6a6650; margin-top:8px; text-align:center; }
+
+  footer{
+    background:var(--ink); color:rgba(237,232,221,0.6);
+    text-align:center; padding:28px 20px; font-family:'IBM Plex Mono',monospace; font-size:12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">NE <span>STREET WEAR</span></div>
+  <button class="cart-btn" id="cartOpenBtn">CART <span class="cart-count" id="cartCount">0</span></button>
+</div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Nusrat Enterprises · Bhubaneswar</div>
+    <h1>Men's &amp; Kids<br>Streetwear</h1>
+    <p>Wholesale and retail. Browse the catalog, build your order, send it straight to us on WhatsApp — no forms, no calls.</p>
+    <div class="hero-cta">
+      <a href="#catalog" class="btn btn-primary">View Catalog</a>
+      <a href="#" class="btn btn-outline" id="waDirectBtn">Chat on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section class="catalog" id="catalog">
+  <div class="catalog-head">
+    <h2>Catalog</h2>
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+    </div>
+  </div>
+  <div class="grid" id="grid">
+    <div class="loading">Loading products…</div>
+  </div>
+</section>
+
+<footer>NE Street Wear — Nusrat Enterprises · Orders placed via WhatsApp</footer>
+
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3>Your Order</h3>
+    <button class="close-btn" id="closeDrawerBtn">✕</button>
+  </div>
+  <div class="drawer-body" id="cartBody">
+    <p class="mono" style="font-size:12px;color:#6a6650;">Your cart is empty.</p>
+  </div>
+  <div class="drawer-foot">
+    <div class="total-row"><span>TOTAL</span><span id="cartTotal">₹0</span></div>
+    <button class="wa-btn" id="waCheckoutBtn">SEND ORDER ON WHATSAPP</button>
+    <p class="wa-hint">Opens WhatsApp with your order pre-filled. Nothing is charged here.</p>
+  </div>
+</div>
+
+<script>
+/* ======================= CONFIG — EDIT THESE ======================= */
+const CONFIG = {
+  // Your Google Sheet ID (from the sheet's URL) — sheet must be shared "Anyone with link: Viewer"
+  SHEET_ID: "PASTE_YOUR_GOOGLE_SHEET_ID_HERE",
+  // Name of the tab/sheet holding products
+  SHEET_TAB: "Products",
+  // Your WhatsApp number in international format, no + or spaces, e.g. 919876543210
+  WHATSAPP_NUMBER: "91XXXXXXXXXX"
+};
+/* ===================================================================== */
+
+let PRODUCTS = [];
+let CART = JSON.parse(localStorage.getItem("ne_cart") || "[]");
+
+function gvizUrl(){
+  return `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(CONFIG.SHEET_TAB)}`;
+}
+
+async function loadProducts(){
+  const grid = document.getElementById("grid");
+  try{
+    const res = await fetch(gvizUrl());
+    const raw = await res.text();
+    const json = JSON.parse(raw.substring(raw.indexOf("{"), raw.lastIndexOf("}") + 1));
+    const rows = json.table.rows;
+    // Expected columns in order: Name, Price, Description, Category, Type (Wholesale/Retail), ImageURL, InStock
+    PRODUCTS = rows.map((r, i) => {
+      const c = r.c;
+      const val = idx => (c[idx] && c[idx].v !== null && c[idx].v !== undefined) ? c[idx].v : "";
+      return {
+        id: i,
+        name: val(0) || "Unnamed",
+        price: Number(val(1)) || 0,
+        desc: val(2) || "",
+        category: val(3) || "General",
+        type: (val(4) || "Retail").toString().trim(),
+        image: val(5) || "",
+        inStock: val(6) === "" ? true : /^(yes|true|1|in stock)$/i.test(String(val(6)))
+      };
+    }).filter(p => p.inStock);
+    buildFilters();
+    renderGrid("all");
+  }catch(err){
+    grid.innerHTML = `<div class="empty-state">Couldn't load products.<br>Check that SHEET_ID is set and the sheet is shared as "Anyone with link: Viewer".</div>`;
+    console.error(err);
+  }
+}
+
+function buildFilters(){
+  const cats = ["all", ...new Set(PRODUCTS.map(p => p.category))];
+  const wrap = document.getElementById("filters");
+  wrap.innerHTML = cats.map(cat =>
+    `<button class="filter-btn ${cat==='all'?'active':''}" data-filter="${cat}">${cat}</button>`
+  ).join("");
+  wrap.querySelectorAll(".filter-btn").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      wrap.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      renderGrid(btn.dataset.filter);
+    });
+  });
+}
+
+function renderGrid(filter){
+  const grid = document.getElementById("grid");
+  const list = filter === "all" ? PRODUCTS : PRODUCTS.filter(p=>p.category===filter);
+  if(!list.length){
+    grid.innerHTML = `<div class="empty-state">No products in this category yet.</div>`;
+    return;
+  }
+  grid.innerHTML = list.map(p => `
+    <div class="card">
+      <div class="tag ${p.type.toLowerCase()==='wholesale'?'':'retail'}">${p.type.toUpperCase()}</div>
+      <img class="card-img" src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='https://placehold.co/400x500/EDE8DD/14140f?text=No+Image'">
+      <div class="card-body">
+        <div class="card-cat">${p.category}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="card-foot">
+          <div class="card-price">₹${p.price}</div>
+          <button class="add-btn" onclick="addToCart(${p.id})">ADD</button>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+
+function addToCart(id){
+  const product = PRODUCTS.find(p=>p.id===id);
+  const existing = CART.find(i=>i.id===id);
+  if(existing){ existing.qty += 1; } else { CART.push({...product, qty:1}); }
+  saveCart();
+  openDrawer();
+}
+
+function changeQty(id, delta){
+  const item = CART.find(i=>i.id===id);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty <= 0) CART = CART.filter(i=>i.id!==id);
+  saveCart();
+}
+
+function removeItem(id){
+  CART = CART.filter(i=>i.id!==id);
+  saveCart();
+}
+
+function saveCart(){
+  localStorage.setItem("ne_cart", JSON.stringify(CART));
+  renderCart();
+}
+
+function renderCart(){
+  const body = document.getElementById("cartBody");
+  const countEl = document.getElementById("cartCount");
+  const totalEl = document.getElementById("cartTotal");
+  const totalQty = CART.reduce((s,i)=>s+i.qty,0);
+  countEl.textContent = totalQty;
+  if(!CART.length){
+    body.innerHTML = `<p class="mono" style="font-size:12px;color:#6a6650;">Your cart is empty.</p>`;
+    totalEl.textContent = "₹0";
+    return;
+  }
+  body.innerHTML = CART.map(i => `
+    <div class="cart-item">
+      <img src="${i.image}" onerror="this.src='https://placehold.co/100x120/EDE8DD/14140f?text=NE'">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${i.name}</div>
+        <div class="cart-item-meta">₹${i.price} · ${i.type}</div>
+        <div class="qty-row">
+          <button class="qty-btn" onclick="changeQty(${i.id},-1)">−</button>
+          <span class="mono" style="font-size:13px;">${i.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${i.id},1)">+</button>
+          <button class="remove-link" onclick="removeItem(${i.id})">remove</button>
+        </div>
+      </div>
+    </div>
+  `).join("");
+  const total = CART.reduce((s,i)=>s+i.price*i.qty,0);
+  totalEl.textContent = "₹" + total;
+}
+
+function buildWhatsAppMessage(){
+  if(!CART.length) return "Hi! I'd like to place an order.";
+  let lines = ["Hi! I'd like to order:", ""];
+  CART.forEach(i=>{
+    lines.push(`• ${i.name} (${i.type}) x${i.qty} — ₹${i.price*i.qty}`);
+  });
+  const total = CART.reduce((s,i)=>s+i.price*i.qty,0);
+  lines.push("", `Total: ₹${total}`, "", "Name: ", "Address: ");
+  return lines.join("\n");
+}
+
+/* drawer controls */
+const overlay = document.getElementById("overlay");
+const drawer = document.getElementById("drawer");
+function openDrawer(){ overlay.classList.add("open"); drawer.classList.add("open"); }
+function closeDrawer(){ overlay.classList.remove("open"); drawer.classList.remove("open"); }
+document.getElementById("cartOpenBtn").addEventListener("click", openDrawer);
+document.getElementById("closeDrawerBtn").addEventListener("click", closeDrawer);
+overlay.addEventListener("click", closeDrawer);
+
+document.getElementById("waCheckoutBtn").addEventListener("click", ()=>{
+  const msg = encodeURIComponent(buildWhatsAppMessage());
+  window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${msg}`, "_blank");
+});
+document.getElementById("waDirectBtn").addEventListener("click", (e)=>{
+  e.preventDefault();
+  window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}`, "_blank");
+});
+
+renderCart();
+loadProducts();
+</script>
+</body>
+</html>
