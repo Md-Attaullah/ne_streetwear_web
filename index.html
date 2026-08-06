@@ -4,33 +4,59 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NE Street Wear — Nusrat Enterprises</title>
-<meta name="description" content="Men's & kids streetwear. Wholesale and retail. Bhubaneswar.">
+<meta name="description" content="Men's & kids streetwear. Bhubaneswar.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#14140f;
-    --bone:#EDE8DD;
-    --tape:#E8B923;
-    --rust:#C4491D;
-    --olive:#4A5A3A;
-    --line: rgba(20,20,15,0.15);
-    --radius: 2px;
+    --paper:#F1ECDF;
+    --ink:#17171A;
+    --red:#E13B2C;
+    --blue:#2E4FD9;
+    --grey:#8A8677;
+    --line: rgba(23,23,26,0.16);
+    --radius: 3px;
+    --bg: var(--paper);
+    --surface: #ffffff;
+    --text: var(--ink);
+    --text-dim: #5a5747;
+    --text-dim2: #6a6650;
+    --chrome-bg: #ffffff;
+    --chrome-text: var(--ink);
+    --chrome-text-dim: rgba(23,23,26,0.68);
+    --chrome-border: rgba(23,23,26,0.25);
+  }
+  html[data-theme="dark"]{
+    --bg:#121215;
+    --surface:#1c1c22;
+    --text:#F1ECDF;
+    --text-dim:#b8b3a0;
+    --text-dim2:#9d9886;
+    --line: rgba(241,236,223,0.18);
+    --chrome-bg: #17171A;
+    --chrome-text: #F1ECDF;
+    --chrome-text-dim: rgba(241,236,223,0.72);
+    --chrome-border: rgba(241,236,223,0.35);
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
-    background:var(--bone);
-    color:var(--ink);
-    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Space Grotesk',sans-serif;
     -webkit-font-smoothing:antialiased;
+    background-image: radial-gradient(var(--grey) 0.6px, transparent 0.6px);
+    background-size: 14px 14px;
+    background-attachment: fixed;
+    background-color: var(--bg);
+    background-blend-mode: multiply;
+    transition: background-color .2s, color .2s;
   }
-  h1,h2,h3, .display{
-    font-family:'Anton', sans-serif;
-    font-weight:400;
+  .display{
+    font-family:'Archivo Black', sans-serif;
     text-transform:uppercase;
-    letter-spacing:0.01em;
-    line-height:0.95;
+    letter-spacing:-0.01em;
+    line-height:0.92;
   }
   .mono{ font-family:'IBM Plex Mono', monospace; }
   a{color:inherit;}
@@ -41,19 +67,20 @@
     position:sticky; top:0; z-index:50;
     display:flex; align-items:center; justify-content:space-between;
     padding:14px 20px;
-    background:var(--ink); color:var(--bone);
-    border-bottom:3px solid var(--tape);
+    background:var(--chrome-bg); color:var(--chrome-text);
+    border-bottom:4px solid var(--red);
   }
-  .brand{ font-size:clamp(18px,3vw,24px); letter-spacing:0.03em; }
-  .brand span{color:var(--tape);}
+  .brand{ font-family:'Archivo Black',sans-serif; font-size:clamp(16px,3vw,20px); letter-spacing:-0.02em; text-transform:uppercase; }
+  .brand span{color:var(--red);}
   .cart-btn{
-    background:var(--tape); color:var(--ink);
+    background:var(--red); color:#fff;
     border:none; padding:9px 14px; border-radius:var(--radius);
     font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:13px;
     cursor:pointer; display:flex; align-items:center; gap:6px;
   }
+  .theme-toggle{ background:transparent !important; color:var(--chrome-text) !important; border:1px solid var(--chrome-border) !important; }
   .cart-count{
-    background:var(--ink); color:var(--tape);
+    background:#fff; color:var(--red);
     border-radius:50%; width:20px; height:20px;
     display:flex; align-items:center; justify-content:center;
     font-size:11px;
@@ -61,51 +88,66 @@
 
   /* ---------- hero ---------- */
   .hero{
-    background:var(--ink); color:var(--bone);
-    padding:64px 20px 56px;
+    background:var(--chrome-bg); color:var(--chrome-text);
+    padding:60px 20px 50px;
     position:relative; overflow:hidden;
-  }
-  .hero::after{
-    content:"";
-    position:absolute; inset:0;
-    background-image: repeating-linear-gradient(-45deg, rgba(232,185,35,0.06) 0 2px, transparent 2px 22px);
-    pointer-events:none;
   }
   .hero-inner{ max-width:900px; margin:0 auto; position:relative; }
   .hero-eyebrow{
-    font-family:'IBM Plex Mono',monospace; color:var(--tape);
-    font-size:12px; letter-spacing:0.2em; text-transform:uppercase;
-    border:1px dashed var(--tape); display:inline-block;
-    padding:4px 10px; margin-bottom:18px; border-radius:var(--radius);
+    font-family:'IBM Plex Mono',monospace; color:var(--red);
+    font-size:12px; letter-spacing:0.18em; text-transform:uppercase;
+    border:1px solid var(--red); display:inline-block;
+    padding:4px 10px; margin-bottom:20px; border-radius:var(--radius);
   }
-  .hero h1{ font-size:clamp(42px,9vw,84px); }
-  .hero p{ margin-top:16px; max-width:520px; color:rgba(237,232,221,0.75); font-size:16px; }
-  .hero-cta{
-    margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;
+  .hero h1{
+    font-size:clamp(40px,9vw,80px);
+    position:relative;
   }
+  .hero h1 .misprint{
+    position:relative;
+    display:inline-block;
+  }
+  .hero h1 .misprint::before, .hero h1 .misprint::after{
+    content:attr(data-text);
+    position:absolute; top:0; left:0; width:100%;
+    z-index:-1;
+  }
+  .hero h1 .misprint::before{ color:var(--red); transform:translate(3px,2px); }
+  .hero h1 .misprint::after{ color:var(--blue); transform:translate(-3px,-2px); }
+  .hero p{ margin-top:18px; max-width:520px; color:var(--chrome-text-dim); font-size:16px; }
+  .hero-cta{ margin-top:26px; display:flex; gap:12px; flex-wrap:wrap; }
   .btn{
     display:inline-block; padding:13px 22px; border-radius:var(--radius);
     font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:13px;
-    text-decoration:none; letter-spacing:0.03em; cursor:pointer; border:none;
+    text-decoration:none; letter-spacing:0.02em; cursor:pointer; border:none;
   }
-  .btn-primary{ background:var(--tape); color:var(--ink); }
-  .btn-outline{ background:transparent; color:var(--bone); border:1px solid rgba(237,232,221,0.4); }
+  .btn-primary{ background:var(--red); color:#fff; }
+  .btn-outline{ background:transparent; color:var(--chrome-text); border:1px solid var(--chrome-border); }
 
   /* ---------- catalog controls ---------- */
-  .catalog{ max-width:1120px; margin:0 auto; padding:48px 20px 80px; }
+  .catalog{ max-width:1120px; margin:0 auto; padding:44px 20px 80px; }
   .catalog-head{
     display:flex; justify-content:space-between; align-items:flex-end;
-    flex-wrap:wrap; gap:16px; margin-bottom:28px;
-    border-bottom:2px solid var(--ink); padding-bottom:14px;
+    flex-wrap:wrap; gap:16px; margin-bottom:20px;
+    border-bottom:3px solid var(--text); padding-bottom:14px;
   }
-  .catalog-head h2{ font-size:clamp(28px,5vw,40px); }
+  .catalog-head h2.display{ font-size:clamp(26px,5vw,38px); }
   .filters{ display:flex; gap:8px; flex-wrap:wrap; }
   .filter-btn{
     font-family:'IBM Plex Mono',monospace; font-size:12px;
-    padding:7px 12px; border:1px solid var(--ink); background:transparent;
+    padding:7px 12px; border:1px solid var(--text); background:transparent;
     border-radius:var(--radius); cursor:pointer; text-transform:uppercase;
+    color:var(--text);
   }
-  .filter-btn.active{ background:var(--ink); color:var(--bone); }
+  .filter-btn.active{ background:var(--ink); color:var(--paper); }
+
+  .search-row{ margin-bottom:24px; }
+  .search-input{
+    width:100%; padding:12px 14px; border:2px solid var(--text);
+    border-radius:var(--radius); font-family:'Space Grotesk',sans-serif;
+    font-size:14px; background:var(--surface); color:var(--text);
+  }
+  .search-input:focus{ outline:2px solid var(--red); }
 
   .grid{
     display:grid;
@@ -113,152 +155,195 @@
     gap:22px;
   }
 
-  /* ---------- product card w/ hang-tag signature ---------- */
+  /* ---------- product card ---------- */
   .card{
-    background:#fff; border:1px dashed var(--line);
+    background:var(--surface); border:1px solid var(--text);
     border-radius:var(--radius); position:relative;
     display:flex; flex-direction:column; overflow:hidden;
   }
-  .tag{
-    position:absolute; top:10px; left:-6px; z-index:2;
-    background:var(--olive); color:var(--bone);
-    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.08em;
-    padding:4px 10px 4px 14px; transform:rotate(-3deg);
-    box-shadow:1px 2px 3px rgba(0,0,0,0.25);
+  .badge{
+    position:absolute; top:10px; left:10px; z-index:2;
+    background:var(--red); color:#fff; width:46px; height:46px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:700;
+    letter-spacing:0.02em; transform:rotate(-8deg); line-height:1.1;
+    box-shadow:0 2px 4px rgba(0,0,0,0.3);
   }
-  .tag.retail{ background:var(--rust); }
-  .tag::before{
-    content:""; position:absolute; left:4px; top:50%; transform:translateY(-50%);
-    width:4px; height:4px; border-radius:50%; background:var(--bone);
+  .img-wrap{ position:relative; aspect-ratio:4/5; width:100%; overflow:hidden; background:#e4dfd2; }
+  .card-img{ width:100%; height:100%; object-fit:cover; filter:grayscale(0.55) contrast(1.05); }
+  .img-wrap::after{
+    content:""; position:absolute; inset:0;
+    background:var(--blue); mix-blend-mode:multiply; opacity:0.16;
   }
-  .card-img{
-    aspect-ratio:4/5; width:100%; object-fit:cover;
-    background:#e4dfd2;
+  .card.sold-out .card-img{ filter:grayscale(1) contrast(0.9) brightness(1.1); opacity:0.55; }
+  .sold-ribbon{
+    position:absolute; top:16px; right:-34px; z-index:3;
+    background:var(--ink); color:var(--paper); transform:rotate(35deg);
+    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.1em;
+    padding:4px 40px; text-align:center;
   }
   .card-body{ padding:14px 14px 16px; display:flex; flex-direction:column; gap:6px; flex:1; }
-  .card-cat{ font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase; color:var(--olive); letter-spacing:0.1em; }
+  .card-cat{ font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase; color:var(--blue); letter-spacing:0.1em; }
   .card-name{ font-size:16px; font-weight:600; line-height:1.25; }
-  .card-desc{ font-size:12.5px; color:#5a5747; line-height:1.4; flex:1; }
+  .card-desc{ font-size:12.5px; color:var(--text-dim); line-height:1.4; flex:1; }
+
+  .size-row{ display:flex; gap:6px; flex-wrap:wrap; margin-top:4px; }
+  .size-chip{
+    border:1px solid var(--text); background:var(--surface); color:var(--text); border-radius:var(--radius);
+    padding:4px 9px; font-family:'IBM Plex Mono',monospace; font-size:11px; cursor:pointer;
+  }
+  .size-chip.selected{ background:var(--text); color:var(--bg); }
+
   .card-foot{ display:flex; align-items:center; justify-content:space-between; margin-top:6px; }
-  .card-price{ font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:15px; }
+  .card-price{ font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:15px; }
   .add-btn{
-    background:var(--ink); color:var(--bone); border:none;
+    background:var(--ink); color:var(--paper); border:none;
     padding:8px 12px; border-radius:var(--radius); cursor:pointer;
     font-family:'IBM Plex Mono',monospace; font-size:12px;
   }
-  .add-btn:active{ background:var(--tape); color:var(--ink); }
+  .add-btn:active{ background:var(--red); }
+  .add-btn:disabled{ background:var(--grey); cursor:not-allowed; }
 
   .empty-state, .loading{
     grid-column:1/-1; text-align:center; padding:60px 20px;
-    font-family:'IBM Plex Mono',monospace; color:#7a765f; font-size:13px;
+    font-family:'IBM Plex Mono',monospace; color:var(--text-dim2); font-size:13px;
   }
 
   /* ---------- cart drawer ---------- */
   .overlay{
-    position:fixed; inset:0; background:rgba(20,20,15,0.5);
+    position:fixed; inset:0; background:rgba(23,23,26,0.55);
     opacity:0; pointer-events:none; transition:opacity .2s; z-index:60;
   }
   .overlay.open{ opacity:1; pointer-events:auto; }
   .drawer{
-    position:fixed; top:0; right:0; height:100%; width:min(380px,92vw);
-    background:var(--bone); z-index:70;
+    position:fixed; top:0; right:0; height:100%; width:min(390px,92vw);
+    background:var(--bg); z-index:70;
     transform:translateX(100%); transition:transform .25s ease;
     display:flex; flex-direction:column;
-    box-shadow:-4px 0 18px rgba(0,0,0,0.2);
+    box-shadow:-4px 0 18px rgba(0,0,0,0.25);
   }
   .drawer.open{ transform:translateX(0); }
   .drawer-head{
-    padding:18px 20px; background:var(--ink); color:var(--bone);
+    padding:18px 20px; background:var(--chrome-bg); color:var(--chrome-text);
     display:flex; justify-content:space-between; align-items:center;
-    border-bottom:3px dashed var(--tape);
+    border-bottom:4px solid var(--red);
   }
-  .drawer-head h3{ font-size:20px; }
-  .close-btn{ background:none; border:none; color:var(--bone); font-size:20px; cursor:pointer; }
+  .drawer-head h3.display{ font-size:20px; }
+  .order-ref{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--red); }
+  .close-btn{ background:none; border:none; color:var(--chrome-text); font-size:20px; cursor:pointer; }
   .drawer-body{ flex:1; overflow-y:auto; padding:16px 20px; }
-  .cart-item{
-    display:flex; gap:10px; padding:12px 0; border-bottom:1px dashed var(--line);
-  }
+  .cart-item{ display:flex; gap:10px; padding:12px 0; border-bottom:1px dashed var(--line); }
   .cart-item img{ width:54px; height:64px; object-fit:cover; border-radius:var(--radius); }
   .cart-item-info{ flex:1; }
   .cart-item-name{ font-size:13.5px; font-weight:600; }
-  .cart-item-meta{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:#6a6650; margin-top:2px; }
+  .cart-item-meta{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-dim2); margin-top:2px; }
   .qty-row{ display:flex; align-items:center; gap:8px; margin-top:6px; }
   .qty-btn{
-    width:22px; height:22px; border:1px solid var(--ink); background:none;
-    border-radius:var(--radius); cursor:pointer; font-family:'IBM Plex Mono',monospace;
+    width:22px; height:22px; border:1px solid var(--text); background:none;
+    border-radius:var(--radius); cursor:pointer; font-family:'IBM Plex Mono',monospace; color:var(--text);
   }
-  .remove-link{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--rust); background:none; border:none; cursor:pointer; text-decoration:underline; margin-left:auto; }
-  .drawer-foot{ padding:18px 20px; border-top:2px solid var(--ink); }
-  .total-row{ display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:16px; margin-bottom:14px; }
-  .wa-btn{
-    width:100%; background:#25D366; color:#062b14; border:none;
-    padding:14px; border-radius:var(--radius); font-family:'IBM Plex Mono',monospace;
-    font-weight:700; font-size:14px; cursor:pointer;
-  }
-  .wa-hint{ font-size:11px; color:#6a6650; margin-top:8px; text-align:center; }
+  .remove-link{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--red); background:none; border:none; cursor:pointer; text-decoration:underline; margin-left:auto; }
+  .drawer-foot{ padding:16px 20px; border-top:3px solid var(--text); }
+  .total-row{ display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:16px; margin-bottom:12px; }
 
   .cust-form{ margin-bottom:14px; padding-top:10px; border-top:1px dashed var(--line); }
   .cust-label{
     display:block; font-family:'IBM Plex Mono',monospace; font-size:10px;
-    text-transform:uppercase; letter-spacing:0.06em; color:#6a6650; margin:8px 0 3px;
+    text-transform:uppercase; letter-spacing:0.06em; color:var(--text-dim2); margin:8px 0 3px;
   }
   .cust-input{
-    width:100%; padding:9px 10px; border:1px solid var(--ink); border-radius:var(--radius);
-    font-family:'Inter',sans-serif; font-size:13px; background:#fff; color:var(--ink);
+    width:100%; padding:9px 10px; border:1px solid var(--text); border-radius:var(--radius);
+    font-family:'Space Grotesk',sans-serif; font-size:13px; background:var(--surface); color:var(--text);
     resize:none;
   }
-  .cust-input:focus{ outline:2px solid var(--tape); }
+  .cust-input:focus{ outline:2px solid var(--red); }
   .loc-btn{
     width:100%; margin-top:10px; padding:9px; background:transparent;
-    border:1px dashed var(--ink); border-radius:var(--radius); cursor:pointer;
-    font-family:'IBM Plex Mono',monospace; font-size:12px;
+    border:1px dashed var(--text); border-radius:var(--radius); cursor:pointer;
+    font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--text);
   }
-  .loc-status{ font-size:11px; color:var(--olive); margin-top:4px; min-height:14px; }
-  .field-error{ outline:2px solid var(--rust) !important; }
+  .loc-status{ font-size:11px; color:var(--blue); margin-top:4px; min-height:14px; }
+  .field-error{ outline:2px solid var(--red) !important; }
+
+  .btn-row{ display:flex; gap:8px; }
+  .wa-btn{
+    flex:1; background:#25D366; color:#062b14; border:none;
+    padding:14px; border-radius:var(--radius); font-family:'IBM Plex Mono',monospace;
+    font-weight:700; font-size:13px; cursor:pointer;
+  }
+  .copy-btn{
+    background:var(--ink); color:var(--paper); border:none;
+    padding:14px 16px; border-radius:var(--radius); font-family:'IBM Plex Mono',monospace;
+    font-weight:600; font-size:13px; cursor:pointer;
+  }
+  .wa-hint{ font-size:11px; color:var(--text-dim2); margin-top:8px; text-align:center; }
 
   footer{
-    background:var(--ink); color:rgba(237,232,221,0.6);
+    background:var(--chrome-bg); color:var(--chrome-text-dim);
     text-align:center; padding:28px 20px; font-family:'IBM Plex Mono',monospace; font-size:12px;
   }
+  .footer-links{ margin-bottom:14px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+  .footer-links a{
+    color:var(--chrome-text); text-decoration:none; border:1px solid var(--chrome-border);
+    padding:8px 14px; border-radius:var(--radius); font-size:12px; letter-spacing:0.03em;
+  }
+  .footer-links a:hover{ border-color:var(--red); color:var(--red); }
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <div class="brand">NE <span>STREET WEAR</span></div>
-  <button class="cart-btn" id="cartOpenBtn">CART <span class="cart-count" id="cartCount">0</span></button>
+  <div style="display:flex; align-items:center; gap:10px;">
+    <button class="cart-btn theme-toggle" id="themeToggleBtn" title="Toggle dark mode">🌙</button>
+    <button class="cart-btn" id="cartOpenBtn">CART <span class="cart-count" id="cartCount">0</span></button>
+  </div>
 </div>
 
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-eyebrow">Nusrat Enterprises · Bhubaneswar</div>
-    <h1>Men's &amp; Kids<br>Streetwear</h1>
-    <p>Wholesale and retail. Browse the catalog, build your order, send it straight to us on WhatsApp — no forms, no calls.</p>
+    <h1 class="display"><span class="misprint" data-text="MEN'S & KIDS">MEN'S & KIDS</span><br><span class="misprint" data-text="STREETWEAR">STREETWEAR</span></h1>
+    <p>Browse the catalog, build your order, send it straight to us on WhatsApp — no forms, no calls.</p>
     <div class="hero-cta">
       <a href="#catalog" class="btn btn-primary">View Catalog</a>
       <a href="#" class="btn btn-outline" id="waDirectBtn">Chat on WhatsApp</a>
+      <a href="https://www.instagram.com/ne_street_wear?igsh=MTQ3amQzYmE1dHR0NA%3D%3D&utm_source=qr" target="_blank" rel="noopener" class="btn btn-outline">Instagram</a>
+      <a href="https://chat.whatsapp.com/KpQqVDQB0Ec70znjvd9KH4?s=cl&p=i&mlu=0" target="_blank" rel="noopener" class="btn btn-outline">Join Channel</a>
     </div>
   </div>
 </section>
 
 <section class="catalog" id="catalog">
   <div class="catalog-head">
-    <h2>Catalog</h2>
+    <h2 class="display">Catalog</h2>
     <div class="filters" id="filters">
       <button class="filter-btn active" data-filter="all">All</button>
     </div>
+  </div>
+  <div class="search-row">
+    <input class="search-input" id="searchInput" type="text" placeholder="Search products…">
   </div>
   <div class="grid" id="grid">
     <div class="loading">Loading products…</div>
   </div>
 </section>
 
-<footer>NE Street Wear — Nusrat Enterprises · Orders placed via WhatsApp</footer>
+<footer>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/ne_street_wear?igsh=MTQ3amQzYmE1dHR0NA%3D%3D&utm_source=qr" target="_blank" rel="noopener">📷 Instagram</a>
+    <a href="https://chat.whatsapp.com/KpQqVDQB0Ec70znjvd9KH4?s=cl&p=i&mlu=0" target="_blank" rel="noopener">💬 WhatsApp Channel</a>
+  </div>
+  NE Street Wear — Nusrat Enterprises · Orders placed via WhatsApp
+</footer>
 
 <div class="overlay" id="overlay"></div>
 <div class="drawer" id="drawer">
   <div class="drawer-head">
-    <h3>Your Order</h3>
+    <div>
+      <h3 class="display">Your Order</h3>
+      <div class="order-ref" id="orderRef"></div>
+    </div>
     <button class="close-btn" id="closeDrawerBtn">✕</button>
   </div>
   <div class="drawer-body" id="cartBody">
@@ -281,7 +366,10 @@
       <p class="loc-status" id="locStatus"></p>
     </div>
 
-    <button class="wa-btn" id="waCheckoutBtn">SEND ORDER ON WHATSAPP</button>
+    <div class="btn-row">
+      <button class="wa-btn" id="waCheckoutBtn">SEND ON WHATSAPP</button>
+      <button class="copy-btn" id="copyBtn" title="Copy order text">⧉</button>
+    </div>
     <p class="wa-hint">Opens WhatsApp with your order pre-filled. Nothing is charged here.</p>
   </div>
 </div>
@@ -289,17 +377,16 @@
 <script>
 /* ======================= CONFIG — EDIT THESE ======================= */
 const CONFIG = {
-  // Your Google Sheet ID (from the sheet's URL) — sheet must be shared "Anyone with link: Viewer"
   SHEET_ID: "10EE12WTclmq-SWce-1i1hden1zpN33pgk1hXbqpH1Ow",
-  // Name of the tab/sheet holding products
   SHEET_TAB: "products",
-  // Your WhatsApp number in international format, no + or spaces, e.g. 919876543210
   WHATSAPP_NUMBER: "919330066455"
 };
 /* ===================================================================== */
 
 let PRODUCTS = [];
 let CART = JSON.parse(localStorage.getItem("ne_cart") || "[]");
+let selectedSizes = {}; // productId -> size
+const ORDER_NUMBER = "NE-" + Math.floor(1000 + Math.random()*9000);
 
 function gvizUrl(){
   return `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(CONFIG.SHEET_TAB)}`;
@@ -312,23 +399,25 @@ async function loadProducts(){
     const raw = await res.text();
     const json = JSON.parse(raw.substring(raw.indexOf("{"), raw.lastIndexOf("}") + 1));
     const rows = json.table.rows;
-    // Expected columns in order: Name, Price, Description, Category, Type (Wholesale/Retail), ImageURL, InStock
+    // Columns: Name, Price, Description, Category, Type(tag), ImageURL, InStock, Sizes(optional, comma-separated e.g. "S,M,L,XL")
     PRODUCTS = rows.map((r, i) => {
       const c = r.c;
       const val = idx => (c[idx] && c[idx].v !== null && c[idx].v !== undefined) ? c[idx].v : "";
+      const sizesRaw = val(7);
       return {
         id: i,
         name: val(0) || "Unnamed",
         price: Number(val(1)) || 0,
         desc: val(2) || "",
         category: val(3) || "General",
-        type: (val(4) || "Retail").toString().trim(),
+        type: (val(4) || "").toString().trim(),
         image: val(5) || "",
-        inStock: val(6) === "" ? true : /^(yes|true|1|in stock)$/i.test(String(val(6)))
+        inStock: val(6) === "" ? true : /^(yes|true|1|in stock)$/i.test(String(val(6))),
+        sizes: sizesRaw ? String(sizesRaw).split(",").map(s=>s.trim()).filter(Boolean) : []
       };
-    }).filter(p => p.inStock);
+    });
     buildFilters();
-    renderGrid("all");
+    renderGrid("all", "");
   }catch(err){
     grid.innerHTML = `<div class="empty-state">Couldn't load products.<br>Check that SHEET_ID is set and the sheet is shared as "Anyone with link: Viewer".</div>`;
     console.error(err);
@@ -345,53 +434,81 @@ function buildFilters(){
     btn.addEventListener("click", ()=>{
       wrap.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active"));
       btn.classList.add("active");
-      renderGrid(btn.dataset.filter);
+      renderGrid(btn.dataset.filter, document.getElementById("searchInput").value);
     });
   });
 }
 
-function renderGrid(filter){
+function currentFilter(){
+  return document.querySelector(".filter-btn.active")?.dataset.filter || "all";
+}
+
+function renderGrid(filter, searchTerm){
   const grid = document.getElementById("grid");
-  const list = filter === "all" ? PRODUCTS : PRODUCTS.filter(p=>p.category===filter);
+  let list = filter === "all" ? PRODUCTS : PRODUCTS.filter(p=>p.category===filter);
+  const q = (searchTerm||"").trim().toLowerCase();
+  if(q) list = list.filter(p=>p.name.toLowerCase().includes(q));
   if(!list.length){
-    grid.innerHTML = `<div class="empty-state">No products in this category yet.</div>`;
+    grid.innerHTML = `<div class="empty-state">No products match.</div>`;
     return;
   }
   grid.innerHTML = list.map(p => `
-    <div class="card">
-      <div class="tag ${p.type.toLowerCase()==='wholesale'?'':'retail'}">${p.type.toUpperCase()}</div>
-      <img class="card-img" src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='https://placehold.co/400x500/EDE8DD/14140f?text=No+Image'">
+    <div class="card ${!p.inStock ? 'sold-out' : ''}">
+      ${p.type ? `<div class="badge">${p.type.toUpperCase()}</div>` : ""}
+      ${!p.inStock ? `<div class="sold-ribbon">SOLD OUT</div>` : ""}
+      <div class="img-wrap">
+        <img class="card-img" src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='https://placehold.co/400x500/F1ECDF/17171A?text=No+Image'">
+      </div>
       <div class="card-body">
         <div class="card-cat">${p.category}</div>
         <div class="card-name">${p.name}</div>
         <div class="card-desc">${p.desc}</div>
+        ${p.sizes.length ? `<div class="size-row" id="sizes-${p.id}">
+          ${p.sizes.map(s=>`<button class="size-chip" onclick="selectSize(${p.id},'${s}',this)">${s}</button>`).join("")}
+        </div>` : ""}
         <div class="card-foot">
           <div class="card-price">₹${p.price}</div>
-          <button class="add-btn" onclick="addToCart(${p.id})">ADD</button>
+          <button class="add-btn" ${!p.inStock?'disabled':''} onclick="addToCart(${p.id})">${p.inStock ? 'ADD' : 'SOLD OUT'}</button>
         </div>
       </div>
     </div>
   `).join("");
 }
 
+document.getElementById("searchInput").addEventListener("input", (e)=>{
+  renderGrid(currentFilter(), e.target.value);
+});
+
+function selectSize(id, size, btn){
+  selectedSizes[id] = size;
+  document.querySelectorAll(`#sizes-${id} .size-chip`).forEach(c=>c.classList.remove("selected"));
+  btn.classList.add("selected");
+}
+
 function addToCart(id){
   const product = PRODUCTS.find(p=>p.id===id);
-  const existing = CART.find(i=>i.id===id);
-  if(existing){ existing.qty += 1; } else { CART.push({...product, qty:1}); }
+  if(!product.inStock) return;
+  if(product.sizes.length && !selectedSizes[id]){
+    alert("Please select a size first.");
+    return;
+  }
+  const size = selectedSizes[id] || null;
+  const existing = CART.find(i=>i.id===id && i.size===size);
+  if(existing){ existing.qty += 1; } else { CART.push({...product, qty:1, size}); }
   saveCart();
   openDrawer();
 }
 
-function changeQty(id, delta){
-  const item = CART.find(i=>i.id===id);
+function changeQty(cartIndex, delta){
+  const item = CART[cartIndex];
   if(!item) return;
   item.qty += delta;
-  if(item.qty <= 0) CART = CART.filter(i=>i.id!==id);
+  if(item.qty <= 0) CART.splice(cartIndex,1);
   saveCart();
 }
 
-function removeItem(id){
-  CART = CART.filter(i=>i.id!==id);
+function removeItem(cartIndex){
+  CART.splice(cartIndex,1);
   saveCart();
 }
 
@@ -404,24 +521,26 @@ function renderCart(){
   const body = document.getElementById("cartBody");
   const countEl = document.getElementById("cartCount");
   const totalEl = document.getElementById("cartTotal");
+  const orderRefEl = document.getElementById("orderRef");
   const totalQty = CART.reduce((s,i)=>s+i.qty,0);
   countEl.textContent = totalQty;
+  orderRefEl.textContent = CART.length ? `Ref: ${ORDER_NUMBER}` : "";
   if(!CART.length){
     body.innerHTML = `<p class="mono" style="font-size:12px;color:#6a6650;">Your cart is empty.</p>`;
     totalEl.textContent = "₹0";
     return;
   }
-  body.innerHTML = CART.map(i => `
+  body.innerHTML = CART.map((i,idx) => `
     <div class="cart-item">
-      <img src="${i.image}" onerror="this.src='https://placehold.co/100x120/EDE8DD/14140f?text=NE'">
+      <img src="${i.image}" onerror="this.src='https://placehold.co/100x120/F1ECDF/17171A?text=NE'">
       <div class="cart-item-info">
         <div class="cart-item-name">${i.name}</div>
-        <div class="cart-item-meta">₹${i.price} · ${i.type}</div>
+        <div class="cart-item-meta">₹${i.price}${i.size ? " · Size " + i.size : ""}</div>
         <div class="qty-row">
-          <button class="qty-btn" onclick="changeQty(${i.id},-1)">−</button>
+          <button class="qty-btn" onclick="changeQty(${idx},-1)">−</button>
           <span class="mono" style="font-size:13px;">${i.qty}</span>
-          <button class="qty-btn" onclick="changeQty(${i.id},1)">+</button>
-          <button class="remove-link" onclick="removeItem(${i.id})">remove</button>
+          <button class="qty-btn" onclick="changeQty(${idx},1)">+</button>
+          <button class="remove-link" onclick="removeItem(${idx})">remove</button>
         </div>
       </div>
     </div>
@@ -430,13 +549,13 @@ function renderCart(){
   totalEl.textContent = "₹" + total;
 }
 
-/* ---- customer details: load saved, persist, validate ---- */
+/* ---- customer details ---- */
 const custNameEl = document.getElementById("custName");
 const custMobileEl = document.getElementById("custMobile");
 const custAddressEl = document.getElementById("custAddress");
 const locBtn = document.getElementById("locBtn");
 const locStatus = document.getElementById("locStatus");
-let savedLocation = null; // {lat, lng}
+let savedLocation = null;
 
 (function loadSavedCustomer(){
   const saved = JSON.parse(localStorage.getItem("ne_customer") || "{}");
@@ -480,9 +599,9 @@ function validateCustomerFields(){
 
 function buildWhatsAppMessage(){
   if(!CART.length) return "Hi! I'd like to place an order.";
-  let lines = ["Hi! I'd like to order:", ""];
+  let lines = [`Order Ref: ${ORDER_NUMBER}`, "Hi! I'd like to order:", ""];
   CART.forEach(i=>{
-    lines.push(`• ${i.name} (${i.type}) x${i.qty} — ₹${i.price*i.qty}`);
+    lines.push(`• ${i.name}${i.size ? " (Size "+i.size+")" : ""}${i.type ? " ["+i.type+"]" : ""} x${i.qty} — ₹${i.price*i.qty}`);
   });
   const total = CART.reduce((s,i)=>s+i.price*i.qty,0);
   lines.push("", `Total: ₹${total}`, "");
@@ -507,7 +626,6 @@ overlay.addEventListener("click", closeDrawer);
 document.getElementById("waCheckoutBtn").addEventListener("click", ()=>{
   if(!CART.length){ return; }
   if(!validateCustomerFields()){
-    locStatus.textContent = "";
     alert("Please fill in your name, a valid 10-digit mobile number, and address before sending.");
     return;
   }
@@ -515,9 +633,45 @@ document.getElementById("waCheckoutBtn").addEventListener("click", ()=>{
   const msg = encodeURIComponent(buildWhatsAppMessage());
   window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${msg}`, "_blank");
 });
+
+document.getElementById("copyBtn").addEventListener("click", ()=>{
+  if(!CART.length) return;
+  if(!validateCustomerFields()){
+    alert("Please fill in your name, a valid 10-digit mobile number, and address first.");
+    return;
+  }
+  saveCustomer();
+  const text = buildWhatsAppMessage();
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=>alert("Order text copied!"));
+  } else {
+    const ta = document.createElement("textarea");
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand("copy"); document.body.removeChild(ta);
+    alert("Order text copied!");
+  }
+});
+
 document.getElementById("waDirectBtn").addEventListener("click", (e)=>{
   e.preventDefault();
   window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}`, "_blank");
+});
+
+/* ---- dark mode ---- */
+const themeToggleBtn = document.getElementById("themeToggleBtn");
+function applyTheme(theme){
+  document.documentElement.setAttribute("data-theme", theme);
+  themeToggleBtn.textContent = theme === "dark" ? "🌙" : "☀️";
+  localStorage.setItem("ne_theme", theme);
+}
+(function initTheme(){
+  const saved = localStorage.getItem("ne_theme");
+  const systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  applyTheme(saved || (systemDark ? "dark" : "light"));
+})();
+themeToggleBtn.addEventListener("click", ()=>{
+  const current = document.documentElement.getAttribute("data-theme");
+  applyTheme(current === "dark" ? "light" : "dark");
 });
 
 renderCart();
