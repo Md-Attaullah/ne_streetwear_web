@@ -197,6 +197,25 @@
   }
   .wa-hint{ font-size:11px; color:#6a6650; margin-top:8px; text-align:center; }
 
+  .cust-form{ margin-bottom:14px; padding-top:10px; border-top:1px dashed var(--line); }
+  .cust-label{
+    display:block; font-family:'IBM Plex Mono',monospace; font-size:10px;
+    text-transform:uppercase; letter-spacing:0.06em; color:#6a6650; margin:8px 0 3px;
+  }
+  .cust-input{
+    width:100%; padding:9px 10px; border:1px solid var(--ink); border-radius:var(--radius);
+    font-family:'Inter',sans-serif; font-size:13px; background:#fff; color:var(--ink);
+    resize:none;
+  }
+  .cust-input:focus{ outline:2px solid var(--tape); }
+  .loc-btn{
+    width:100%; margin-top:10px; padding:9px; background:transparent;
+    border:1px dashed var(--ink); border-radius:var(--radius); cursor:pointer;
+    font-family:'IBM Plex Mono',monospace; font-size:12px;
+  }
+  .loc-status{ font-size:11px; color:var(--olive); margin-top:4px; min-height:14px; }
+  .field-error{ outline:2px solid var(--rust) !important; }
+
   footer{
     background:var(--ink); color:rgba(237,232,221,0.6);
     text-align:center; padding:28px 20px; font-family:'IBM Plex Mono',monospace; font-size:12px;
@@ -247,6 +266,21 @@
   </div>
   <div class="drawer-foot">
     <div class="total-row"><span>TOTAL</span><span id="cartTotal">₹0</span></div>
+
+    <div class="cust-form">
+      <label class="cust-label">Name *</label>
+      <input class="cust-input" id="custName" type="text" placeholder="Your full name">
+
+      <label class="cust-label">Mobile Number *</label>
+      <input class="cust-input" id="custMobile" type="tel" placeholder="10-digit mobile number">
+
+      <label class="cust-label">Delivery Address *</label>
+      <textarea class="cust-input" id="custAddress" rows="2" placeholder="House no, street, city, pincode"></textarea>
+
+      <button class="loc-btn" id="locBtn">📍 Add current location (optional)</button>
+      <p class="loc-status" id="locStatus"></p>
+    </div>
+
     <button class="wa-btn" id="waCheckoutBtn">SEND ORDER ON WHATSAPP</button>
     <p class="wa-hint">Opens WhatsApp with your order pre-filled. Nothing is charged here.</p>
   </div>
@@ -396,6 +430,54 @@ function renderCart(){
   totalEl.textContent = "₹" + total;
 }
 
+/* ---- customer details: load saved, persist, validate ---- */
+const custNameEl = document.getElementById("custName");
+const custMobileEl = document.getElementById("custMobile");
+const custAddressEl = document.getElementById("custAddress");
+const locBtn = document.getElementById("locBtn");
+const locStatus = document.getElementById("locStatus");
+let savedLocation = null; // {lat, lng}
+
+(function loadSavedCustomer(){
+  const saved = JSON.parse(localStorage.getItem("ne_customer") || "{}");
+  if(saved.name) custNameEl.value = saved.name;
+  if(saved.mobile) custMobileEl.value = saved.mobile;
+  if(saved.address) custAddressEl.value = saved.address;
+})();
+
+function saveCustomer(){
+  localStorage.setItem("ne_customer", JSON.stringify({
+    name: custNameEl.value.trim(),
+    mobile: custMobileEl.value.trim(),
+    address: custAddressEl.value.trim()
+  }));
+}
+
+locBtn.addEventListener("click", ()=>{
+  if(!navigator.geolocation){
+    locStatus.textContent = "Location not supported on this device.";
+    return;
+  }
+  locStatus.textContent = "Getting location…";
+  navigator.geolocation.getCurrentPosition(
+    (pos)=>{
+      savedLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      locStatus.textContent = "✓ Location added";
+    },
+    ()=>{ locStatus.textContent = "Couldn't get location — you can skip this."; },
+    { timeout: 8000 }
+  );
+});
+
+function validateCustomerFields(){
+  let ok = true;
+  [custNameEl, custMobileEl, custAddressEl].forEach(el=>el.classList.remove("field-error"));
+  if(!custNameEl.value.trim()){ custNameEl.classList.add("field-error"); ok = false; }
+  if(!/^\d{10}$/.test(custMobileEl.value.trim())){ custMobileEl.classList.add("field-error"); ok = false; }
+  if(!custAddressEl.value.trim()){ custAddressEl.classList.add("field-error"); ok = false; }
+  return ok;
+}
+
 function buildWhatsAppMessage(){
   if(!CART.length) return "Hi! I'd like to place an order.";
   let lines = ["Hi! I'd like to order:", ""];
@@ -403,7 +485,13 @@ function buildWhatsAppMessage(){
     lines.push(`• ${i.name} (${i.type}) x${i.qty} — ₹${i.price*i.qty}`);
   });
   const total = CART.reduce((s,i)=>s+i.price*i.qty,0);
-  lines.push("", `Total: ₹${total}`, "", "Name: ", "Address: ");
+  lines.push("", `Total: ₹${total}`, "");
+  lines.push(`Name: ${custNameEl.value.trim()}`);
+  lines.push(`Mobile: ${custMobileEl.value.trim()}`);
+  lines.push(`Address: ${custAddressEl.value.trim()}`);
+  if(savedLocation){
+    lines.push(`Location: https://maps.google.com/?q=${savedLocation.lat},${savedLocation.lng}`);
+  }
   return lines.join("\n");
 }
 
@@ -417,6 +505,13 @@ document.getElementById("closeDrawerBtn").addEventListener("click", closeDrawer)
 overlay.addEventListener("click", closeDrawer);
 
 document.getElementById("waCheckoutBtn").addEventListener("click", ()=>{
+  if(!CART.length){ return; }
+  if(!validateCustomerFields()){
+    locStatus.textContent = "";
+    alert("Please fill in your name, a valid 10-digit mobile number, and address before sending.");
+    return;
+  }
+  saveCustomer();
   const msg = encodeURIComponent(buildWhatsAppMessage());
   window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${msg}`, "_blank");
 });
