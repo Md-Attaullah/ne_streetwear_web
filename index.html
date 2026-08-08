@@ -243,6 +243,24 @@
   }
   .wa-hint{ font-size:11.5px; color:var(--text-dim2); margin-top:10px; text-align:center; }
 
+  .store-section{
+    background:var(--bg); padding:56px 32px; border-bottom:1px solid var(--line);
+  }
+  .store-inner{
+    max-width:1120px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;
+  }
+  @media (max-width:720px){ .store-inner{ grid-template-columns:1fr; } }
+  .store-title{ font-size:clamp(22px,4vw,28px); margin-bottom:14px; }
+  .store-line{ font-size:14px; color:var(--text-dim); line-height:1.7; margin-bottom:6px; }
+  .store-line a{ color:var(--text); text-decoration:underline; }
+  .store-btns{ display:flex; gap:10px; flex-wrap:wrap; margin-top:20px; }
+  .store-btn{
+    display:inline-flex; align-items:center; gap:8px; padding:11px 18px; border-radius:var(--radius);
+    font-size:13px; font-weight:500; text-decoration:none; border:1px solid var(--line); color:var(--text);
+  }
+  .store-btn.filled{ background:var(--text); color:var(--bg); border-color:var(--text); }
+  .store-map-wrap{ border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); aspect-ratio:4/3; }
+  .store-map-wrap iframe{ width:100%; height:100%; border:0; }
   footer{
     background:var(--chrome-bg); color:var(--chrome-text-dim);
     text-align:center; padding:40px 20px; font-size:12.5px;
@@ -252,6 +270,13 @@
     color:var(--chrome-text); text-decoration:none; border:1px solid var(--chrome-border);
     border-radius:50%; font-size:12px;
   }
+  .toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--text); color:var(--bg); padding:12px 20px; border-radius:24px;
+    font-size:13px; font-weight:500; z-index:80; opacity:0; pointer-events:none;
+    transition:opacity .25s, transform .25s;
+  }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
@@ -272,8 +297,27 @@
     <div class="hero-cta">
       <a href="#catalog" class="btn btn-primary">View Catalog</a>
       <a href="#" class="btn btn-outline" id="waDirectBtn">Chat on WhatsApp</a>
-      <a href="https://www.instagram.com/ne_street_wear?igsh=MTQ3amQzYmE1dHR0NA%3D%3D&utm_source=qr" target="_blank" rel="noopener" class="btn btn-outline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:6px;"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2Zm0 1.802c-2.67 0-2.987.01-4.04.059-.976.045-1.505.207-1.858.344-.466.181-.8.398-1.15.748-.35.35-.566.684-.747 1.15-.137.353-.3.882-.344 1.857-.05 1.054-.06 1.37-.06 4.04 0 2.67.01 2.987.06 4.04.045.976.207 1.505.344 1.858.18.466.397.8.747 1.15.35.35.684.566 1.15.747.353.137.882.3 1.857.344 1.054.05 1.37.06 4.04.06 2.67 0 2.987-.01 4.04-.06.976-.045 1.505-.207 1.858-.344.466-.18.8-.397 1.15-.747.35-.35.566-.684.747-1.15.137-.353.3-.882.344-1.857.05-1.054.06-1.37.06-4.04 0-2.67-.01-2.987-.06-4.04-.045-.976-.207-1.505-.344-1.858a3.09 3.09 0 0 0-.747-1.15 3.098 3.098 0 0 0-1.15-.747c-.353-.137-.882-.3-1.857-.344-1.054-.05-1.37-.06-4.04-.06Zm0 3.064a5.135 5.135 0 1 1 0 10.268 5.135 5.135 0 0 1 0-10.268Zm0 1.802a3.333 3.333 0 1 0 0 6.665 3.333 3.333 0 0 0 0-6.665Zm5.338-1.983a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z" fill="currentColor"/></svg>Instagram</a>
-      <a href="https://chat.whatsapp.com/KpQqVDQB0Ec70znjvd9KH4?s=cl&p=i&mlu=0" target="_blank" rel="noopener" class="btn btn-outline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:6px;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.74.46 3.44 1.32 4.94L2.05 22l5.28-1.38a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm0 18.14h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.13.82.84-3.05-.2-.31a8.19 8.19 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.25 8.24Zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.17-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42h-.48c-.16 0-.42.06-.65.31-.22.24-.85.83-.85 2.04s.87 2.37 1 2.53c.12.17 1.7 2.6 4.13 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.09.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z" fill="currentColor"/></svg>Join Channel</a>
+      <a href="https://www.instagram.com/ne_street_wear?igsh=MTQ3amQzYmE1dHR0NA%3D%3D&utm_source=qr" target="_blank" rel="noopener" class="btn btn-outline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:6px;"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2Zm0 1.802c-2.67 0-2.987.01-4.04.059-.976.045-1.505.207-1.858.344-.466.181-.8.398-1.15.748-.35.35-.566.684-.747 1.15-.137.353-.3.882-.344 1.857-.05 1.054-.06 1.37-.06 4.04 0 2.67.01 2.987.06 4.04.045.976.207 1.505.344 1.858.18.466.397.8.747 1.15.35.35.684.566 1.15.747.353.137.882.3 1.857.344 1.054.05 1.37.06 4.04.06 2.67 0 2.987-.01 4.04-.06.976-.045 1.505-.207 1.858-.344.466-.18.8-.397 1.15-.747.35-.35.566-.684.747-1.15.137-.353.3-.882.344-1.857.05-1.054.06-1.37.06-4.04 0-2.67-.01-2.987-.06-4.04-.045-.976-.207-1.505-.344-1.858a3.09 3.09 0 0 0-.747-1.15 3.098 3.098 0 0 0-1.15-.747c-.353-.137-.882-.3-1.857-.344-1.054-.05-1.37-.06-4.04-.06Zm0 3.064a5.135 5.135 0 1 1 0 10.268 5.135 5.135 0 0 1 0-10.268Zm0 1.802a3.333 3.333 0 1 0 0 6.665 3.333 3.333 0 0 0 0-6.665Zm5.338-1.983a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z" fill="#E1306C"/></svg>Instagram</a>
+      <a href="https://chat.whatsapp.com/KpQqVDQB0Ec70znjvd9KH4?s=cl&p=i&mlu=0" target="_blank" rel="noopener" class="btn btn-outline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:6px;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.74.46 3.44 1.32 4.94L2.05 22l5.28-1.38a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm0 18.14h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.13.82.84-3.05-.2-.31a8.19 8.19 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.25 8.24Zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.17-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42h-.48c-.16 0-.42.06-.65.31-.22.24-.85.83-.85 2.04s.87 2.37 1 2.53c.12.17 1.7 2.6 4.13 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.09.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z" fill="#25D366"/></svg>Join Channel</a>
+    </div>
+  </div>
+</section>
+
+<section class="store-section">
+  <div class="store-inner">
+    <div>
+      <h2 class="display store-title">Visit Our Store</h2>
+      <p class="store-line">Plot no-53, Goutam Nagar, Bhubaneswar, Odisha, 751014</p>
+      <p class="store-line">Phone: <a href="tel:+919040366455">9040366455</a> · <a href="tel:+917978830017">7978830017</a> · <a href="tel:+919330066455">9330066455</a></p>
+      <p class="store-line">WhatsApp: <a href="https://wa.me/919330066455" target="_blank" rel="noopener">9330066455</a></p>
+      <div class="store-btns">
+        <a href="https://share.google/Curm1JDrVXVKdQLMK" target="_blank" rel="noopener" class="store-btn filled">Get Directions</a>
+        <a href="https://share.google/Curm1JDrVXVKdQLMK" target="_blank" rel="noopener" class="store-btn">Write a Review</a>
+        <a href="https://wa.me/919330066455" target="_blank" rel="noopener" class="store-btn">WhatsApp Us</a>
+      </div>
+    </div>
+    <div class="store-map-wrap">
+      <iframe loading="lazy" src="https://maps.google.com/maps?q=Plot%20no-53%2C%20Goutam%20Nagar%2C%20Bhubaneswar%2C%20Odisha%2C%20751014&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
     </div>
   </div>
 </section>
@@ -295,13 +339,14 @@
 
 <footer>
   <div class="footer-links">
-    <a href="https://www.instagram.com/ne_street_wear?igsh=MTQ3amQzYmE1dHR0NA%3D%3D&utm_source=qr" target="_blank" rel="noopener" title="Instagram" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:0;"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2Zm0 1.802c-2.67 0-2.987.01-4.04.059-.976.045-1.505.207-1.858.344-.466.181-.8.398-1.15.748-.35.35-.566.684-.747 1.15-.137.353-.3.882-.344 1.857-.05 1.054-.06 1.37-.06 4.04 0 2.67.01 2.987.06 4.04.045.976.207 1.505.344 1.858.18.466.397.8.747 1.15.35.35.684.566 1.15.747.353.137.882.3 1.857.344 1.054.05 1.37.06 4.04.06 2.67 0 2.987-.01 4.04-.06.976-.045 1.505-.207 1.858-.344.466-.18.8-.397 1.15-.747.35-.35.566-.684.747-1.15.137-.353.3-.882.344-1.857.05-1.054.06-1.37.06-4.04 0-2.67-.01-2.987-.06-4.04-.045-.976-.207-1.505-.344-1.858a3.09 3.09 0 0 0-.747-1.15 3.098 3.098 0 0 0-1.15-.747c-.353-.137-.882-.3-1.857-.344-1.054-.05-1.37-.06-4.04-.06Zm0 3.064a5.135 5.135 0 1 1 0 10.268 5.135 5.135 0 0 1 0-10.268Zm0 1.802a3.333 3.333 0 1 0 0 6.665 3.333 3.333 0 0 0 0-6.665Zm5.338-1.983a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z" fill="currentColor"/></svg></a>
-    <a href="https://chat.whatsapp.com/KpQqVDQB0Ec70znjvd9KH4?s=cl&p=i&mlu=0" target="_blank" rel="noopener" title="WhatsApp Channel" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:0;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.74.46 3.44 1.32 4.94L2.05 22l5.28-1.38a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm0 18.14h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.13.82.84-3.05-.2-.31a8.19 8.19 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.25 8.24Zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.17-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42h-.48c-.16 0-.42.06-.65.31-.22.24-.85.83-.85 2.04s.87 2.37 1 2.53c.12.17 1.7 2.6 4.13 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.09.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z" fill="currentColor"/></svg></a>
+    <a href="https://www.instagram.com/ne_street_wear?igsh=MTQ3amQzYmE1dHR0NA%3D%3D&utm_source=qr" target="_blank" rel="noopener" title="Instagram" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:0;"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2Zm0 1.802c-2.67 0-2.987.01-4.04.059-.976.045-1.505.207-1.858.344-.466.181-.8.398-1.15.748-.35.35-.566.684-.747 1.15-.137.353-.3.882-.344 1.857-.05 1.054-.06 1.37-.06 4.04 0 2.67.01 2.987.06 4.04.045.976.207 1.505.344 1.858.18.466.397.8.747 1.15.35.35.684.566 1.15.747.353.137.882.3 1.857.344 1.054.05 1.37.06 4.04.06 2.67 0 2.987-.01 4.04-.06.976-.045 1.505-.207 1.858-.344.466-.18.8-.397 1.15-.747.35-.35.566-.684.747-1.15.137-.353.3-.882.344-1.857.05-1.054.06-1.37.06-4.04 0-2.67-.01-2.987-.06-4.04-.045-.976-.207-1.505-.344-1.858a3.09 3.09 0 0 0-.747-1.15 3.098 3.098 0 0 0-1.15-.747c-.353-.137-.882-.3-1.857-.344-1.054-.05-1.37-.06-4.04-.06Zm0 3.064a5.135 5.135 0 1 1 0 10.268 5.135 5.135 0 0 1 0-10.268Zm0 1.802a3.333 3.333 0 1 0 0 6.665 3.333 3.333 0 0 0 0-6.665Zm5.338-1.983a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z" fill="#E1306C"/></svg></a>
+    <a href="https://chat.whatsapp.com/KpQqVDQB0Ec70znjvd9KH4?s=cl&p=i&mlu=0" target="_blank" rel="noopener" title="WhatsApp Channel" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:0;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.74.46 3.44 1.32 4.94L2.05 22l5.28-1.38a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm0 18.14h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.13.82.84-3.05-.2-.31a8.19 8.19 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.25 8.24Zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.17-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42h-.48c-.16 0-.42.06-.65.31-.22.24-.85.83-.85 2.04s.87 2.37 1 2.53c.12.17 1.7 2.6 4.13 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.09.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z" fill="#25D366"/></svg></a>
   </div>
   NE Street Wear — Nusrat Enterprises · Orders placed via WhatsApp
 </footer>
 
 <div class="overlay" id="overlay"></div>
+<div class="toast" id="toast">Added to cart</div>
 <div class="drawer" id="drawer">
   <div class="drawer-head">
     <div>
@@ -460,7 +505,16 @@ function addToCart(id){
   const existing = CART.find(i=>i.id===id && i.size===size);
   if(existing){ existing.qty += 1; } else { CART.push({...product, qty:1, size}); }
   saveCart();
-  openDrawer();
+  showToast(`${product.name} added to cart`);
+}
+
+const toastEl = document.getElementById("toast");
+let toastTimer = null;
+function showToast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>toastEl.classList.remove("show"), 1800);
 }
 
 function changeQty(cartIndex, delta){
