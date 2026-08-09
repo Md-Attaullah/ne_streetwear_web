@@ -123,12 +123,34 @@
 
   .empty-state, .loading{ grid-column:1/-1; text-align:center; padding:70px 20px; color:var(--text-dim2); font-size:13.5px; }
 
-  footer{ background:var(--chrome-bg); color:var(--chrome-text-dim); text-align:center; padding:40px 20px; font-size:12.5px; }
+  footer{ background:var(--chrome-bg); color:var(--chrome-text-dim); text-align:center; padding:40px 20px 90px; font-size:12.5px; }
   .footer-links{ margin-bottom:18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
   .footer-links a{ color:var(--chrome-text); text-decoration:none; border:1px solid var(--chrome-border); border-radius:50%; font-size:12px; display:flex; align-items:center; justify-content:center; width:38px; height:38px; }
 
   .toast{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--text); color:var(--bg); padding:12px 20px; border-radius:24px; font-size:13px; font-weight:500; z-index:80; opacity:0; pointer-events:none; transition:opacity .25s, transform .25s; }
   .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  .size-label{ font-size:10px; color:var(--text-dim2); text-transform:uppercase; letter-spacing:0.05em; margin-top:6px; }
+  .shortlist-btn{ background:transparent; color:var(--text); border:1px solid var(--line); }
+  .shortlist-btn.added{ background:var(--text); color:var(--bg); border-color:var(--text); }
+
+  .featured-row{ margin-bottom:40px; }
+  .featured-label{ font-size:13px; font-weight:600; margin-bottom:14px; display:flex; align-items:center; gap:6px; }
+  .featured-scroll{ display:flex; gap:16px; overflow-x:auto; padding-bottom:6px; -webkit-overflow-scrolling:touch; }
+  .featured-scroll::-webkit-scrollbar{ height:4px; }
+  .featured-scroll .card{ min-width:170px; max-width:170px; flex:0 0 auto; }
+
+  .shortlist-bar{
+    position:fixed; bottom:0; left:0; right:0; z-index:65;
+    background:var(--chrome-bg); color:var(--chrome-text); border-top:1px solid var(--chrome-border);
+    padding:14px 20px; display:flex; align-items:center; justify-content:space-between; gap:14px;
+    transform:translateY(100%); transition:transform .25s ease;
+  }
+  .shortlist-bar.show{ transform:translateY(0); }
+  .shortlist-info{ font-size:13.5px; font-weight:500; }
+  .shortlist-actions{ display:flex; gap:10px; align-items:center; }
+  .shortlist-clear{ background:none; border:none; color:var(--chrome-text-dim); font-size:12.5px; cursor:pointer; text-decoration:underline; }
+  .shortlist-send{ background:#25D366; color:#062b14; border:none; padding:11px 18px; border-radius:var(--radius); font-family:'Inter',sans-serif; font-weight:600; font-size:13px; cursor:pointer; }
 </style>
 </head>
 <body>
@@ -219,7 +241,8 @@
   <div class="catalog-head">
     <h2 class="display">Catalog</h2>
   </div>
-  <p class="catalog-sub">Browse the full range. Tap "Enquire on WhatsApp" for price, sizes, and stock.</p>
+  <p class="catalog-sub">Tap items to add them to your shortlist, then send it to us on WhatsApp in one message.</p>
+  <div id="featuredWrap"></div>
   <div class="filters" id="filters">
     <button class="filter-btn active" data-filter="all">All</button>
   </div>
@@ -241,6 +264,14 @@
 </footer>
 
 <div class="toast" id="toast">Opening WhatsApp…</div>
+
+<div class="shortlist-bar" id="shortlistBar">
+  <div class="shortlist-info" id="shortlistInfo">0 items shortlisted</div>
+  <div class="shortlist-actions">
+    <button class="shortlist-clear" id="shortlistClearBtn">Clear</button>
+    <button class="shortlist-send" id="shortlistSendBtn">Send Shortlist on WhatsApp</button>
+  </div>
+</div>
 
 <script>
 /* ======================= CONFIG — EDIT THESE ======================= */
@@ -281,6 +312,7 @@ async function loadProducts(){
       };
     });
     buildFilters();
+    renderFeatured();
     renderGrid("all", "");
   }catch(err){
     grid.innerHTML = `<div class="empty-state">Couldn't load products.<br>Check that SHEET_ID is set and the sheet is shared as "Anyone with link: Viewer".</div>`;
@@ -291,9 +323,10 @@ async function loadProducts(){
 function buildFilters(){
   const cats = ["all", ...new Set(PRODUCTS.map(p => p.category))];
   const wrap = document.getElementById("filters");
-  wrap.innerHTML = cats.map(cat =>
-    `<button class="filter-btn ${cat==='all'?'active':''}" data-filter="${cat}">${cat}</button>`
-  ).join("");
+  wrap.innerHTML = cats.map(cat => {
+    const count = cat === "all" ? PRODUCTS.length : PRODUCTS.filter(p=>p.category===cat).length;
+    return `<button class="filter-btn ${cat==='all'?'active':''}" data-filter="${cat}">${cat} (${count})</button>`;
+  }).join("");
   wrap.querySelectorAll(".filter-btn").forEach(btn=>{
     btn.addEventListener("click", ()=>{
       wrap.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active"));
@@ -303,8 +336,44 @@ function buildFilters(){
   });
 }
 
+function renderFeatured(){
+  const wrap = document.getElementById("featuredWrap");
+  const featured = PRODUCTS.filter(p=>p.type && p.inStock);
+  if(!featured.length){ wrap.innerHTML = ""; return; }
+  wrap.innerHTML = `
+    <div class="featured-row">
+      <div class="featured-label">✨ Popular right now</div>
+      <div class="featured-scroll">
+        ${featured.map(p => cardHtml(p)).join("")}
+      </div>
+    </div>
+  `;
+}
+
 function currentFilter(){
   return document.querySelector(".filter-btn.active")?.dataset.filter || "all";
+}
+
+function cardHtml(p){
+  const inList = shortlist.includes(p.id);
+  return `
+    <div class="card ${!p.inStock ? 'sold-out' : ''}">
+      <div class="img-wrap">
+        ${p.type ? `<div class="badge">${p.type}</div>` : ""}
+        <img class="card-img" src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='https://placehold.co/400x500/EEEEEE/111111?text=No+Image'">
+        ${!p.inStock ? `<div class="sold-ribbon">Sold out</div>` : ""}
+      </div>
+      <div class="card-body">
+        <div class="card-cat">${p.category}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-desc">${p.desc}</div>
+        ${p.sizes.length ? `<div class="size-label">Available in</div><div class="size-row">${p.sizes.map(s=>`<span class="size-chip">${s}</span>`).join("")}</div>` : ""}
+        <div class="card-foot">
+          <button class="enquire-btn shortlist-btn ${inList ? 'added' : ''} ${!p.inStock?'disabled':''}" onclick="toggleShortlist(${p.id})">${inList ? '✓ Added to Shortlist' : '+ Add to Shortlist'}</button>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 function renderGrid(filter, searchTerm){
@@ -316,37 +385,56 @@ function renderGrid(filter, searchTerm){
     grid.innerHTML = `<div class="empty-state">No products match.</div>`;
     return;
   }
-  grid.innerHTML = list.map(p => `
-    <div class="card ${!p.inStock ? 'sold-out' : ''}">
-      <div class="img-wrap">
-        ${p.type ? `<div class="badge">${p.type}</div>` : ""}
-        <img class="card-img" src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='https://placehold.co/400x500/EEEEEE/111111?text=No+Image'">
-        ${!p.inStock ? `<div class="sold-ribbon">Sold out</div>` : ""}
-      </div>
-      <div class="card-body">
-        <div class="card-cat">${p.category}</div>
-        <div class="card-name">${p.name}</div>
-        <div class="card-desc">${p.desc}</div>
-        ${p.sizes.length ? `<div class="size-row">${p.sizes.map(s=>`<span class="size-chip">${s}</span>`).join("")}</div>` : ""}
-        <div class="card-foot">
-          <a href="#" class="enquire-btn ${!p.inStock?'disabled':''}" onclick="enquire(${p.id}); return false;">Enquire on WhatsApp</a>
-        </div>
-      </div>
-    </div>
-  `).join("");
+  grid.innerHTML = list.map(p => cardHtml(p)).join("");
 }
 
 document.getElementById("searchInput").addEventListener("input", (e)=>{
   renderGrid(currentFilter(), e.target.value);
 });
 
-function enquire(id){
+let shortlist = JSON.parse(localStorage.getItem("ne_shortlist") || "[]");
+
+function toggleShortlist(id){
   const p = PRODUCTS.find(x=>x.id===id);
   if(!p || !p.inStock) return;
-  const msg = `Hi! I'm interested in: ${p.name}${p.category ? " ("+p.category+")" : ""}. Could you share the price and availability?`;
-  showToast("Opening WhatsApp…");
-  window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+  const idx = shortlist.indexOf(id);
+  if(idx === -1){ shortlist.push(id); showToast(`${p.name} added to shortlist`); }
+  else { shortlist.splice(idx,1); }
+  localStorage.setItem("ne_shortlist", JSON.stringify(shortlist));
+  renderShortlistBar();
+  renderGrid(currentFilter(), document.getElementById("searchInput").value);
+  renderFeatured();
 }
+
+function renderShortlistBar(){
+  const bar = document.getElementById("shortlistBar");
+  const info = document.getElementById("shortlistInfo");
+  if(shortlist.length){
+    bar.classList.add("show");
+    info.textContent = `${shortlist.length} item${shortlist.length>1?'s':''} shortlisted`;
+  } else {
+    bar.classList.remove("show");
+  }
+}
+
+document.getElementById("shortlistClearBtn").addEventListener("click", ()=>{
+  shortlist = [];
+  localStorage.setItem("ne_shortlist", JSON.stringify(shortlist));
+  renderShortlistBar();
+  renderGrid(currentFilter(), document.getElementById("searchInput").value);
+  renderFeatured();
+});
+
+document.getElementById("shortlistSendBtn").addEventListener("click", ()=>{
+  if(!shortlist.length) return;
+  const items = shortlist.map(id => PRODUCTS.find(p=>p.id===id)).filter(Boolean);
+  let lines = ["Hi! I'm interested in these items:", ""];
+  items.forEach(p => lines.push(`• ${p.name}${p.category ? " ("+p.category+")" : ""}`));
+  lines.push("", "Could you share price, sizes, and availability for these?");
+  const msg = encodeURIComponent(lines.join("\n"));
+  showToast("Opening WhatsApp…");
+  window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${msg}`, "_blank");
+});
 
 const toastEl = document.getElementById("toast");
 let toastTimer = null;
@@ -390,6 +478,7 @@ themeToggleBtn.addEventListener("click", ()=>{
   applyTheme(current === "dark" ? "light" : "dark");
 });
 
+renderShortlistBar();
 loadProducts();
 </script>
 </body>
