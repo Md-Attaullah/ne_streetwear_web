@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NE Street Wear — Nusrat Enterprises</title>
-<meta name="description" content="Men's & kids streetwear. Bhubaneswar.">
+<meta name="description" content="Men's & kids clothing catalog. Bhubaneswar.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -12,7 +12,6 @@
     --paper:#FFFFFF;
     --ink:#111111;
     --accent:#111111;
-    --accent2:#767676;
     --grey:#9A9A9A;
     --line: rgba(17,17,17,0.10);
     --radius: 4px;
@@ -40,244 +39,44 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Inter',sans-serif;
-    -webkit-font-smoothing:antialiased;
-    transition: background-color .2s, color .2s;
-  }
-  .display{
-    font-family:'Inter',sans-serif;
-    font-weight:600;
-    letter-spacing:-0.02em;
-    line-height:1.1;
-  }
+  body{ background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; transition: background-color .2s, color .2s; }
+  .display{ font-family:'Inter',sans-serif; font-weight:600; letter-spacing:-0.02em; line-height:1.1; }
   a{color:inherit;}
   img{display:block; max-width:100%;}
 
-  /* ---------- topbar ---------- */
-  .topbar{
-    position:sticky; top:0; z-index:50;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:20px 32px;
-    background:var(--chrome-bg); color:var(--chrome-text);
-  }
+  .topbar{ position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:20px 32px; background:var(--chrome-bg); color:var(--chrome-text); }
   .brand{ font-weight:600; font-size:16px; letter-spacing:-0.01em; }
-  .cart-btn{
-    background:transparent; color:var(--chrome-text);
-    border:1px solid var(--chrome-border); padding:9px 16px; border-radius:var(--radius);
-    font-family:'Inter',sans-serif; font-weight:500; font-size:13px;
-    cursor:pointer; display:flex; align-items:center; gap:8px;
-  }
-  .theme-toggle{ background:transparent !important; color:var(--chrome-text) !important; border:1px solid var(--chrome-border) !important; padding:9px 11px !important; }
-  .cart-count{
-    background:var(--text); color:var(--bg);
-    border-radius:50%; width:17px; height:17px;
-    display:flex; align-items:center; justify-content:center;
-    font-size:10px;
-  }
+  .top-btn{ background:transparent; color:var(--chrome-text); border:1px solid var(--chrome-border); padding:9px 14px; border-radius:var(--radius); font-family:'Inter',sans-serif; font-weight:500; font-size:13px; cursor:pointer; display:flex; align-items:center; gap:8px; text-decoration:none; }
+  .top-btn.filled{ background:#25D366; color:#062b14; border-color:#25D366; }
 
-  /* ---------- hero ---------- */
-  .hero{
-    background:var(--chrome-bg); color:var(--chrome-text);
-    padding:90px 32px 70px;
-  }
+  .hero{ background:var(--chrome-bg); color:var(--chrome-text); padding:90px 32px 70px; }
   .hero-inner{ max-width:640px; margin:0 auto; }
-  .hero-eyebrow{
-    font-size:13px; color:var(--chrome-text-dim);
-    margin-bottom:18px; display:block;
-  }
+  .hero-eyebrow{ font-size:13px; color:var(--chrome-text-dim); margin-bottom:18px; display:block; }
   .hero h1{ font-size:clamp(34px,6vw,54px); }
   .hero p{ margin-top:18px; max-width:440px; color:var(--chrome-text-dim); font-size:15px; line-height:1.65; }
   .hero-cta{ margin-top:30px; display:flex; gap:10px; flex-wrap:wrap; }
-  .btn{
-    display:inline-block; padding:12px 22px; border-radius:var(--radius);
-    font-family:'Inter',sans-serif; font-weight:500; font-size:13.5px;
-    text-decoration:none; cursor:pointer; border:none;
-  }
+  .btn{ display:inline-block; padding:12px 22px; border-radius:var(--radius); font-family:'Inter',sans-serif; font-weight:500; font-size:13.5px; text-decoration:none; cursor:pointer; border:none; }
   .btn-primary{ background:var(--text); color:var(--bg); }
-  .btn-outline{ background:transparent; color:var(--chrome-text); border:1px solid var(--chrome-border); }
+  .btn-outline{ background:transparent; color:var(--chrome-text); border:1px solid var(--chrome-border); display:inline-flex; align-items:center; }
 
-  /* ---------- catalog controls ---------- */
-  .catalog{ max-width:1120px; margin:0 auto; padding:56px 32px 90px; }
-  .catalog-head{ margin-bottom:24px; }
-  .catalog-head h2.display{ font-size:clamp(24px,4vw,30px); }
+  .tabnav{ position:sticky; top:65px; z-index:45; display:flex; gap:0; background:var(--chrome-bg); border-bottom:1px solid var(--line); padding:0 32px; }
+  .tab-btn{ padding:14px 18px; background:none; border:none; cursor:pointer; font-family:'Inter',sans-serif; font-size:14px; font-weight:500; color:var(--text-dim2); border-bottom:2px solid transparent; }
+  .tab-btn.active{ color:var(--text); border-bottom-color:var(--text); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
 
-  .filters{ display:flex; gap:22px; flex-wrap:wrap; margin-bottom:28px; border-bottom:1px solid var(--line); }
-  .filter-btn{
-    font-family:'Inter',sans-serif; font-size:13.5px; font-weight:500;
-    padding:0 0 12px; border:none; background:transparent; color:var(--text-dim2);
-    cursor:pointer; border-bottom:2px solid transparent;
-  }
-  .filter-btn.active{ color:var(--text); border-bottom-color:var(--text); }
-
-  .search-row{ margin-bottom:36px; }
-  .search-input{
-    width:100%; padding:12px 16px; border:1px solid var(--line);
-    border-radius:var(--radius); font-family:'Inter',sans-serif;
-    font-size:14px; background:var(--surface); color:var(--text);
-  }
-  .search-input:focus{ outline:none; border-color:var(--text-dim2); }
-
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(230px,1fr));
-    gap:36px 24px;
-  }
-
-  /* ---------- product card ---------- */
-  .card{
-    background:transparent; border:none;
-    position:relative;
-    display:flex; flex-direction:column;
-  }
-  .badge{
-    position:absolute; top:12px; left:12px; z-index:2;
-    background:var(--surface); color:var(--text);
-    font-size:10.5px; font-weight:600;
-    padding:4px 9px; border-radius:20px; letter-spacing:0.02em;
-  }
-  .img-wrap{ position:relative; aspect-ratio:4/5; width:100%; overflow:hidden; background:#eeeeee; border-radius:var(--radius); }
-  .card-img{ width:100%; height:100%; object-fit:cover; }
-  .card.sold-out .card-img{ filter:grayscale(1) brightness(1.08); opacity:0.45; }
-  .sold-ribbon{
-    position:absolute; bottom:12px; left:12px; z-index:3;
-    background:var(--surface); color:var(--text);
-    font-size:10.5px; font-weight:600;
-    padding:5px 10px; border-radius:20px;
-  }
-  .card-body{ padding:14px 2px 0; display:flex; flex-direction:column; gap:5px; flex:1; }
-  .card-cat{ font-size:11.5px; text-transform:uppercase; color:var(--text-dim2); letter-spacing:0.06em; }
-  .card-name{ font-size:15px; font-weight:600; line-height:1.3; }
-  .card-desc{ font-size:12.5px; color:var(--text-dim); line-height:1.45; flex:1; }
-
-  .size-row{ display:flex; gap:6px; flex-wrap:wrap; margin-top:5px; }
-  .size-chip{
-    border:1px solid var(--line); background:transparent; color:var(--text);
-    border-radius:20px; padding:4px 11px; font-size:11.5px; cursor:pointer;
-  }
-  .size-chip.selected{ background:var(--text); color:var(--bg); border-color:var(--text); }
-
-  .card-foot{ display:flex; align-items:center; justify-content:space-between; margin-top:10px; }
-  .card-price{ font-weight:600; font-size:15px; }
-  .add-btn{
-    background:transparent; color:var(--text); border:1px solid var(--line);
-    padding:7px 14px; border-radius:20px; cursor:pointer;
-    font-family:'Inter',sans-serif; font-size:12px; font-weight:500;
-  }
-  .add-btn:hover:not(:disabled){ background:var(--text); color:var(--bg); border-color:var(--text); }
-  .add-btn:disabled{ color:var(--text-dim2); cursor:not-allowed; }
-
-  .empty-state, .loading{
-    grid-column:1/-1; text-align:center; padding:70px 20px;
-    color:var(--text-dim2); font-size:13.5px;
-  }
-
-  /* ---------- cart drawer ---------- */
-  .overlay{
-    position:fixed; inset:0; background:rgba(17,17,17,0.4);
-    opacity:0; pointer-events:none; transition:opacity .2s; z-index:60;
-  }
-  .overlay.open{ opacity:1; pointer-events:auto; }
-  .drawer{
-    position:fixed; top:0; right:0; height:100%; width:min(400px,92vw);
-    background:var(--bg); z-index:70;
-    transform:translateX(100%); transition:transform .25s ease;
-    display:flex; flex-direction:column;
-    box-shadow:-8px 0 30px rgba(0,0,0,0.08);
-  }
-  .drawer.open{ transform:translateX(0); }
-  .drawer-head{
-    padding:22px 28px; background:var(--chrome-bg); color:var(--chrome-text);
-    display:flex; justify-content:space-between; align-items:center;
-    border-bottom:1px solid var(--chrome-border);
-  }
-  .drawer-head h3.display{ font-size:18px; }
-  .order-ref{ font-size:11.5px; color:var(--text-dim2); margin-top:3px; }
-  .close-btn{ background:none; border:none; color:var(--chrome-text); font-size:19px; cursor:pointer; font-weight:300; }
-  .drawer-body{ flex:1; overflow-y:auto; padding:20px 28px; }
-  .cart-item{ display:flex; gap:14px; padding:16px 0; border-bottom:1px solid var(--line); }
-  .cart-item img{ width:54px; height:64px; object-fit:cover; border-radius:var(--radius); }
-  .cart-item-info{ flex:1; }
-  .cart-item-name{ font-size:14px; font-weight:600; }
-  .cart-item-meta{ font-size:12px; color:var(--text-dim2); margin-top:3px; }
-  .qty-row{ display:flex; align-items:center; gap:10px; margin-top:8px; }
-  .qty-btn{
-    width:22px; height:22px; border:1px solid var(--line); background:none; color:var(--text);
-    border-radius:50%; cursor:pointer;
-  }
-  .remove-link{ font-size:11.5px; color:var(--text-dim2); background:none; border:none; cursor:pointer; text-decoration:underline; margin-left:auto; }
-  .drawer-foot{ padding:22px 28px; border-top:1px solid var(--line); }
-  .total-row{ display:flex; justify-content:space-between; align-items:center; font-weight:600; font-size:17px; margin-bottom:16px; }
-  .total-row span:first-child{ font-size:12px; color:var(--text-dim2); font-weight:500; text-transform:uppercase; letter-spacing:0.04em; }
-
-  .cust-form{ margin-bottom:16px; padding-top:14px; border-top:1px solid var(--line); }
-  .cust-label{
-    display:block; font-size:11.5px; color:var(--text-dim2); margin:10px 0 5px;
-  }
-  .cust-input{
-    width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:var(--radius);
-    font-family:'Inter',sans-serif; font-size:13.5px; background:var(--surface); color:var(--text);
-    resize:none;
-  }
-  .cust-input:focus{ outline:none; border-color:var(--text-dim2); }
-  .loc-btn{
-    width:100%; margin-top:12px; padding:10px; background:transparent;
-    border:1px solid var(--line); border-radius:var(--radius); cursor:pointer;
-    font-family:'Inter',sans-serif; font-size:12.5px; color:var(--text);
-  }
-  .loc-status{ font-size:11.5px; color:var(--text-dim); margin-top:6px; min-height:14px; }
-  .field-error{ border-color:#C0392B !important; }
-
-  .btn-row{ display:flex; gap:10px; }
-  .wa-btn{
-    flex:1; background:#25D366; color:#062b14; border:none;
-    padding:14px; border-radius:var(--radius); font-family:'Inter',sans-serif;
-    font-weight:600; font-size:13px; cursor:pointer;
-  }
-  .copy-btn{
-    background:transparent; color:var(--text); border:1px solid var(--line);
-    padding:14px 18px; border-radius:var(--radius); font-family:'Inter',sans-serif;
-    font-weight:500; font-size:13px; cursor:pointer;
-  }
-  .wa-hint{ font-size:11.5px; color:var(--text-dim2); margin-top:10px; text-align:center; }
-
-  .store-section{
-    background:var(--bg); padding:56px 32px; border-bottom:1px solid var(--line);
-  }
-  .store-inner{
-    max-width:1120px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;
-  }
+  .store-section{ background:var(--bg); padding:56px 32px; border-bottom:1px solid var(--line); }
+  .store-inner{ max-width:1120px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
   @media (max-width:720px){ .store-inner{ grid-template-columns:1fr; } }
   .store-title{ font-size:clamp(22px,4vw,28px); margin-bottom:14px; }
   .store-line{ font-size:14px; color:var(--text-dim); line-height:1.7; margin-bottom:6px; }
   .store-line a{ color:var(--text); text-decoration:underline; }
   .store-btns{ display:flex; gap:10px; flex-wrap:wrap; margin-top:20px; }
-  .store-btn{
-    display:inline-flex; align-items:center; gap:8px; padding:11px 18px; border-radius:var(--radius);
-    font-size:13px; font-weight:500; text-decoration:none; border:1px solid var(--line); color:var(--text);
-  }
+  .store-btn{ display:inline-flex; align-items:center; gap:8px; padding:11px 18px; border-radius:var(--radius); font-size:13px; font-weight:500; text-decoration:none; border:1px solid var(--line); color:var(--text); }
   .store-btn.filled{ background:var(--text); color:var(--bg); border-color:var(--text); }
   .store-map-wrap{ border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); aspect-ratio:4/3; }
   .store-map-wrap iframe{ width:100%; height:100%; border:0; }
 
-  /* ---------- tabs ---------- */
-  .tabnav{
-    position:sticky; top:57px; z-index:45;
-    display:flex; gap:0; background:var(--chrome-bg); border-bottom:1px solid var(--line);
-    padding:0 32px;
-  }
-  .tab-btn{
-    padding:14px 18px; background:none; border:none; cursor:pointer;
-    font-family:'Inter',sans-serif; font-size:14px; font-weight:500; color:var(--text-dim2);
-    border-bottom:2px solid transparent;
-  }
-  .tab-btn.active{ color:var(--text); border-bottom-color:var(--text); }
-  .tab-panel{ display:none; }
-  .tab-panel.active{ display:block; }
-
-  /* ---------- reviews ---------- */
   .reviews-section{ padding:56px 32px; background:var(--bg); }
   .reviews-inner{ max-width:900px; margin:0 auto; }
   .reviews-summary{ display:flex; align-items:center; justify-content:center; gap:10px; margin:16px 0 32px; flex-wrap:wrap; }
@@ -289,21 +88,46 @@
   .review-stars{ color:#F5A623; font-size:14px; letter-spacing:1px; margin-bottom:8px; }
   .review-text{ font-size:13px; color:var(--text-dim); line-height:1.55; margin-bottom:12px; }
   .review-author{ font-size:12.5px; font-weight:600; color:var(--text); }
-  footer{
-    background:var(--chrome-bg); color:var(--chrome-text-dim);
-    text-align:center; padding:40px 20px; font-size:12.5px;
-  }
+
+  .catalog{ max-width:1120px; margin:0 auto; padding:40px 32px 90px; }
+  .catalog-head{ margin-bottom:6px; }
+  .catalog-head h2.display{ font-size:clamp(24px,4vw,30px); }
+  .catalog-sub{ font-size:13.5px; color:var(--text-dim2); margin-bottom:24px; }
+
+  .filters{ display:flex; gap:22px; flex-wrap:wrap; margin-bottom:28px; border-bottom:1px solid var(--line); }
+  .filter-btn{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:500; padding:0 0 12px; border:none; background:transparent; color:var(--text-dim2); cursor:pointer; border-bottom:2px solid transparent; }
+  .filter-btn.active{ color:var(--text); border-bottom-color:var(--text); }
+
+  .search-row{ margin-bottom:36px; }
+  .search-input{ width:100%; padding:12px 16px; border:1px solid var(--line); border-radius:var(--radius); font-family:'Inter',sans-serif; font-size:14px; background:var(--surface); color:var(--text); }
+  .search-input:focus{ outline:none; border-color:var(--text-dim2); }
+
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr)); gap:36px 24px; }
+
+  .card{ background:transparent; border:none; position:relative; display:flex; flex-direction:column; }
+  .badge{ position:absolute; top:12px; left:12px; z-index:2; background:var(--surface); color:var(--text); font-size:10.5px; font-weight:600; padding:4px 9px; border-radius:20px; letter-spacing:0.02em; }
+  .img-wrap{ position:relative; aspect-ratio:4/5; width:100%; overflow:hidden; background:#eeeeee; border-radius:var(--radius); }
+  .card-img{ width:100%; height:100%; object-fit:cover; }
+  .card.sold-out .card-img{ filter:grayscale(1) brightness(1.08); opacity:0.45; }
+  .sold-ribbon{ position:absolute; bottom:12px; left:12px; z-index:3; background:var(--surface); color:var(--text); font-size:10.5px; font-weight:600; padding:5px 10px; border-radius:20px; }
+  .card-body{ padding:14px 2px 0; display:flex; flex-direction:column; gap:5px; flex:1; }
+  .card-cat{ font-size:11.5px; text-transform:uppercase; color:var(--text-dim2); letter-spacing:0.06em; }
+  .card-name{ font-size:15px; font-weight:600; line-height:1.3; }
+  .card-desc{ font-size:12.5px; color:var(--text-dim); line-height:1.45; flex:1; }
+  .size-row{ display:flex; gap:6px; flex-wrap:wrap; margin-top:5px; }
+  .size-chip{ border:1px solid var(--line); background:transparent; color:var(--text-dim); border-radius:20px; padding:4px 11px; font-size:11px; }
+  .card-foot{ margin-top:12px; }
+  .enquire-btn{ width:100%; text-align:center; background:transparent; color:var(--text); border:1px solid var(--line); padding:10px 14px; border-radius:var(--radius); cursor:pointer; font-family:'Inter',sans-serif; font-size:12.5px; font-weight:500; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:7px; }
+  .enquire-btn:hover:not(.disabled){ background:var(--text); color:var(--bg); border-color:var(--text); }
+  .enquire-btn.disabled{ color:var(--text-dim2); cursor:not-allowed; pointer-events:none; }
+
+  .empty-state, .loading{ grid-column:1/-1; text-align:center; padding:70px 20px; color:var(--text-dim2); font-size:13.5px; }
+
+  footer{ background:var(--chrome-bg); color:var(--chrome-text-dim); text-align:center; padding:40px 20px; font-size:12.5px; }
   .footer-links{ margin-bottom:18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-  .footer-links a{
-    color:var(--chrome-text); text-decoration:none; border:1px solid var(--chrome-border);
-    border-radius:50%; font-size:12px;
-  }
-  .toast{
-    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
-    background:var(--text); color:var(--bg); padding:12px 20px; border-radius:24px;
-    font-size:13px; font-weight:500; z-index:80; opacity:0; pointer-events:none;
-    transition:opacity .25s, transform .25s;
-  }
+  .footer-links a{ color:var(--chrome-text); text-decoration:none; border:1px solid var(--chrome-border); border-radius:50%; font-size:12px; display:flex; align-items:center; justify-content:center; width:38px; height:38px; }
+
+  .toast{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--text); color:var(--bg); padding:12px 20px; border-radius:24px; font-size:13px; font-weight:500; z-index:80; opacity:0; pointer-events:none; transition:opacity .25s, transform .25s; }
   .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 </style>
 </head>
@@ -312,14 +136,14 @@
 <div class="topbar">
   <div class="brand">NE Street Wear</div>
   <div style="display:flex; align-items:center; gap:10px;">
-    <button class="cart-btn theme-toggle" id="themeToggleBtn" title="Toggle dark mode">☀️</button>
-    <button class="cart-btn" id="cartOpenBtn">Cart <span class="cart-count" id="cartCount">0</span></button>
+    <button class="top-btn" id="themeToggleBtn" title="Toggle dark mode">☀️</button>
+    <a href="https://wa.me/919330066455" target="_blank" rel="noopener" class="top-btn filled">WhatsApp Us</a>
   </div>
 </div>
 
 <div class="tabnav">
   <button class="tab-btn active" data-tab="home">Home</button>
-  <button class="tab-btn" data-tab="products">Products</button>
+  <button class="tab-btn" data-tab="products">Catalog</button>
 </div>
 
 <div id="tab-home" class="tab-panel active">
@@ -328,12 +152,12 @@
   <div class="hero-inner">
     <span class="hero-eyebrow">Nusrat Enterprises · Bhubaneswar</span>
     <h1 class="display">Men's & Kids Clothing</h1>
-    <p>Browse the catalog, build your order, send it straight to us on WhatsApp — no forms, no calls.</p>
+    <p>Browse our full catalog below. Like something? Message us on WhatsApp for price, sizes, and availability.</p>
     <div class="hero-cta">
-      <a href="#" class="btn btn-primary" id="goProductsBtn">View Catalog</a>
-      <a href="#" class="btn btn-outline" id="waDirectBtn">Chat on WhatsApp</a>
-      <a href="https://www.instagram.com/ne_street_wear?igsh=MTQ3amQzYmE1dHR0NA%3D%3D&utm_source=qr" target="_blank" rel="noopener" class="btn btn-outline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:6px;"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2Zm0 1.802c-2.67 0-2.987.01-4.04.059-.976.045-1.505.207-1.858.344-.466.181-.8.398-1.15.748-.35.35-.566.684-.747 1.15-.137.353-.3.882-.344 1.857-.05 1.054-.06 1.37-.06 4.04 0 2.67.01 2.987.06 4.04.045.976.207 1.505.344 1.858.18.466.397.8.747 1.15.35.35.684.566 1.15.747.353.137.882.3 1.857.344 1.054.05 1.37.06 4.04.06 2.67 0 2.987-.01 4.04-.06.976-.045 1.505-.207 1.858-.344.466-.18.8-.397 1.15-.747.35-.35.566-.684.747-1.15.137-.353.3-.882.344-1.857.05-1.054.06-1.37.06-4.04 0-2.67-.01-2.987-.06-4.04-.045-.976-.207-1.505-.344-1.858a3.09 3.09 0 0 0-.747-1.15 3.098 3.098 0 0 0-1.15-.747c-.353-.137-.882-.3-1.857-.344-1.054-.05-1.37-.06-4.04-.06Zm0 3.064a5.135 5.135 0 1 1 0 10.268 5.135 5.135 0 0 1 0-10.268Zm0 1.802a3.333 3.333 0 1 0 0 6.665 3.333 3.333 0 0 0 0-6.665Zm5.338-1.983a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z" fill="#E1306C"/></svg>Instagram</a>
-      <a href="https://chat.whatsapp.com/KpQqVDQB0Ec70znjvd9KH4?s=cl&p=i&mlu=0" target="_blank" rel="noopener" class="btn btn-outline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:6px;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.74.46 3.44 1.32 4.94L2.05 22l5.28-1.38a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm0 18.14h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.13.82.84-3.05-.2-.31a8.19 8.19 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.25 8.24Zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.17-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42h-.48c-.16 0-.42.06-.65.31-.22.24-.85.83-.85 2.04s.87 2.37 1 2.53c.12.17 1.7 2.6 4.13 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.09.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z" fill="#25D366"/></svg>Join Channel</a>
+      <a href="#" class="btn btn-primary" id="goProductsBtn">Browse Catalog</a>
+      <a href="https://wa.me/919330066455" target="_blank" rel="noopener" class="btn btn-outline">Chat on WhatsApp</a>
+      <a href="https://www.instagram.com/ne_street_wear?igsh=MTQ3amQzYmE1dHR0NA%3D%3D&utm_source=qr" target="_blank" rel="noopener" class="btn btn-outline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:6px;"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2Zm0 1.802c-2.67 0-2.987.01-4.04.059-.976.045-1.505.207-1.858.344-.466.181-.8.398-1.15.748-.35.35-.566.684-.747 1.15-.137.353-.3.882-.344 1.857-.05 1.054-.06 1.37-.06 4.04 0 2.67.01 2.987.06 4.04.045.976.207 1.505.344 1.858.18.466.397.8.747 1.15.35.35.684.566 1.15.747.353.137.882.3 1.857.344 1.054.05 1.37.06 4.04.06 2.67 0 2.987-.01 4.04-.06.976-.045 1.505-.207 1.858-.344.466-.18.8-.397 1.15-.747.35-.35.566-.684.747-1.15.137-.353.3-.882.344-1.857.05-1.054.06-1.37.06-4.04 0-2.67-.01-2.987-.06-4.04-.045-.976-.207-1.505-.344-1.858a3.09 3.09 0 0 0-.747-1.15 3.098 3.098 0 0 0-1.15-.747c-.353-.137-.882-.3-1.857-.344-1.054-.05-1.37-.06-4.04-.06Zm0 3.064a5.135 5.135 0 1 1 0 10.268 5.135 5.135 0 0 1 0-10.268Zm0 1.802a3.333 3.333 0 1 0 0 6.665 3.333 3.333 0 0 0 0-6.665Zm5.338-1.983a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z" fill="#E1306C"/></svg>Instagram</a>
+      <a href="https://chat.whatsapp.com/KpQqVDQB0Ec70znjvd9KH4?s=cl&p=i&mlu=0" target="_blank" rel="noopener" class="btn btn-outline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:6px;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.74.46 3.44 1.32 4.94L2.05 22l5.28-1.38a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm0 18.14h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.13.82.84-3.05-.2-.31a8.19 8.19 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.25 8.24Zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.17-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42h-.48c-.16 0-.42.06-.65.31-.22.24-.85.83-.85 2.04s.87 2.37 1 2.53c.12.17 1.7 2.6 4.13 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.09.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z" fill="#25D366"/></svg>Join Channel</a>
     </div>
   </div>
 </section>
@@ -395,6 +219,7 @@
   <div class="catalog-head">
     <h2 class="display">Catalog</h2>
   </div>
+  <p class="catalog-sub">Browse the full range. Tap "Enquire on WhatsApp" for price, sizes, and stock.</p>
   <div class="filters" id="filters">
     <button class="filter-btn active" data-filter="all">All</button>
   </div>
@@ -409,49 +234,13 @@
 
 <footer>
   <div class="footer-links">
-    <a href="https://www.instagram.com/ne_street_wear?igsh=MTQ3amQzYmE1dHR0NA%3D%3D&utm_source=qr" target="_blank" rel="noopener" title="Instagram" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:0;"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2Zm0 1.802c-2.67 0-2.987.01-4.04.059-.976.045-1.505.207-1.858.344-.466.181-.8.398-1.15.748-.35.35-.566.684-.747 1.15-.137.353-.3.882-.344 1.857-.05 1.054-.06 1.37-.06 4.04 0 2.67.01 2.987.06 4.04.045.976.207 1.505.344 1.858.18.466.397.8.747 1.15.35.35.684.566 1.15.747.353.137.882.3 1.857.344 1.054.05 1.37.06 4.04.06 2.67 0 2.987-.01 4.04-.06.976-.045 1.505-.207 1.858-.344.466-.18.8-.397 1.15-.747.35-.35.566-.684.747-1.15.137-.353.3-.882.344-1.857.05-1.054.06-1.37.06-4.04 0-2.67-.01-2.987-.06-4.04-.045-.976-.207-1.505-.344-1.858a3.09 3.09 0 0 0-.747-1.15 3.098 3.098 0 0 0-1.15-.747c-.353-.137-.882-.3-1.857-.344-1.054-.05-1.37-.06-4.04-.06Zm0 3.064a5.135 5.135 0 1 1 0 10.268 5.135 5.135 0 0 1 0-10.268Zm0 1.802a3.333 3.333 0 1 0 0 6.665 3.333 3.333 0 0 0 0-6.665Zm5.338-1.983a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z" fill="#E1306C"/></svg></a>
-    <a href="https://chat.whatsapp.com/KpQqVDQB0Ec70znjvd9KH4?s=cl&p=i&mlu=0" target="_blank" rel="noopener" title="WhatsApp Channel" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:0;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.74.46 3.44 1.32 4.94L2.05 22l5.28-1.38a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm0 18.14h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.13.82.84-3.05-.2-.31a8.19 8.19 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.25 8.24Zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.17-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42h-.48c-.16 0-.42.06-.65.31-.22.24-.85.83-.85 2.04s.87 2.37 1 2.53c.12.17 1.7 2.6 4.13 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.09.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z" fill="#25D366"/></svg></a>
+    <a href="https://www.instagram.com/ne_street_wear?igsh=MTQ3amQzYmE1dHR0NA%3D%3D&utm_source=qr" target="_blank" rel="noopener" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2Zm0 1.802c-2.67 0-2.987.01-4.04.059-.976.045-1.505.207-1.858.344-.466.181-.8.398-1.15.748-.35.35-.566.684-.747 1.15-.137.353-.3.882-.344 1.857-.05 1.054-.06 1.37-.06 4.04 0 2.67.01 2.987.06 4.04.045.976.207 1.505.344 1.858.18.466.397.8.747 1.15.35.35.684.566 1.15.747.353.137.882.3 1.857.344 1.054.05 1.37.06 4.04.06 2.67 0 2.987-.01 4.04-.06.976-.045 1.505-.207 1.858-.344.466-.18.8-.397 1.15-.747.35-.35.566-.684.747-1.15.137-.353.3-.882.344-1.857.05-1.054.06-1.37.06-4.04 0-2.67-.01-2.987-.06-4.04-.045-.976-.207-1.505-.344-1.858a3.09 3.09 0 0 0-.747-1.15 3.098 3.098 0 0 0-1.15-.747c-.353-.137-.882-.3-1.857-.344-1.054-.05-1.37-.06-4.04-.06Zm0 3.064a5.135 5.135 0 1 1 0 10.268 5.135 5.135 0 0 1 0-10.268Zm0 1.802a3.333 3.333 0 1 0 0 6.665 3.333 3.333 0 0 0 0-6.665Zm5.338-1.983a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z" fill="#E1306C"/></svg></a>
+    <a href="https://chat.whatsapp.com/KpQqVDQB0Ec70znjvd9KH4?s=cl&p=i&mlu=0" target="_blank" rel="noopener" title="WhatsApp Channel"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.74.46 3.44 1.32 4.94L2.05 22l5.28-1.38a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm0 18.14h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.13.82.84-3.05-.2-.31a8.19 8.19 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.25 8.24Zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.17-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42h-.48c-.16 0-.42.06-.65.31-.22.24-.85.83-.85 2.04s.87 2.37 1 2.53c.12.17 1.7 2.6 4.13 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.09.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z" fill="#25D366"/></svg></a>
   </div>
-  NE Street Wear — Nusrat Enterprises · Orders placed via WhatsApp
+  NE Street Wear — Nusrat Enterprises · Enquiries via WhatsApp
 </footer>
 
-<div class="overlay" id="overlay"></div>
-<div class="toast" id="toast">Added to cart</div>
-<div class="drawer" id="drawer">
-  <div class="drawer-head">
-    <div>
-      <h3 class="display">Your Order</h3>
-      <div class="order-ref" id="orderRef"></div>
-    </div>
-    <button class="close-btn" id="closeDrawerBtn">✕</button>
-  </div>
-  <div class="drawer-body" id="cartBody">
-    <p style="font-size:13px;color:var(--text-dim2);">Your cart is empty.</p>
-  </div>
-  <div class="drawer-foot">
-    <div class="total-row"><span>Total</span><span id="cartTotal">₹0</span></div>
-
-    <div class="cust-form">
-      <label class="cust-label">Name *</label>
-      <input class="cust-input" id="custName" type="text" placeholder="Your full name">
-
-      <label class="cust-label">Mobile Number *</label>
-      <input class="cust-input" id="custMobile" type="tel" placeholder="10-digit mobile number">
-
-      <label class="cust-label">Delivery Address *</label>
-      <textarea class="cust-input" id="custAddress" rows="2" placeholder="House no, street, city, pincode"></textarea>
-
-      <button class="loc-btn" id="locBtn">Add current location (optional)</button>
-      <p class="loc-status" id="locStatus"></p>
-    </div>
-
-    <div class="btn-row">
-      <button class="wa-btn" id="waCheckoutBtn">Send on WhatsApp</button>
-      <button class="copy-btn" id="copyBtn" title="Copy order text">⧉</button>
-    </div>
-    <p class="wa-hint">Opens WhatsApp with your order pre-filled. Nothing is charged here.</p>
-  </div>
-</div>
+<div class="toast" id="toast">Opening WhatsApp…</div>
 
 <script>
 /* ======================= CONFIG — EDIT THESE ======================= */
@@ -463,9 +252,6 @@ const CONFIG = {
 /* ===================================================================== */
 
 let PRODUCTS = [];
-let CART = JSON.parse(localStorage.getItem("ne_cart") || "[]");
-let selectedSizes = {};
-const ORDER_NUMBER = "NE-" + Math.floor(1000 + Math.random()*9000);
 
 function gvizUrl(){
   return `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(CONFIG.SHEET_TAB)}`;
@@ -478,7 +264,7 @@ async function loadProducts(){
     const raw = await res.text();
     const json = JSON.parse(raw.substring(raw.indexOf("{"), raw.lastIndexOf("}") + 1));
     const rows = json.table.rows;
-    // Columns: Name, Price, Description, Category, Type(tag), ImageURL, InStock, Sizes(optional, comma-separated e.g. "S,M,L,XL")
+    // Columns: Name, Price(ignored), Description, Category, Type(tag), ImageURL, InStock, Sizes(optional, comma-separated)
     PRODUCTS = rows.map((r, i) => {
       const c = r.c;
       const val = idx => (c[idx] && c[idx].v !== null && c[idx].v !== undefined) ? c[idx].v : "";
@@ -486,7 +272,6 @@ async function loadProducts(){
       return {
         id: i,
         name: val(0) || "Unnamed",
-        price: Number(val(1)) || 0,
         desc: val(2) || "",
         category: val(3) || "General",
         type: (val(4) || "").toString().trim(),
@@ -542,12 +327,9 @@ function renderGrid(filter, searchTerm){
         <div class="card-cat">${p.category}</div>
         <div class="card-name">${p.name}</div>
         <div class="card-desc">${p.desc}</div>
-        ${p.sizes.length ? `<div class="size-row" id="sizes-${p.id}">
-          ${p.sizes.map(s=>`<button class="size-chip" onclick="selectSize(${p.id},'${s}',this)">${s}</button>`).join("")}
-        </div>` : ""}
+        ${p.sizes.length ? `<div class="size-row">${p.sizes.map(s=>`<span class="size-chip">${s}</span>`).join("")}</div>` : ""}
         <div class="card-foot">
-          <div class="card-price">₹${p.price}</div>
-          <button class="add-btn" ${!p.inStock?'disabled':''} onclick="addToCart(${p.id})">${p.inStock ? 'Add' : 'Sold out'}</button>
+          <a href="#" class="enquire-btn ${!p.inStock?'disabled':''}" onclick="enquire(${p.id}); return false;">Enquire on WhatsApp</a>
         </div>
       </div>
     </div>
@@ -558,24 +340,12 @@ document.getElementById("searchInput").addEventListener("input", (e)=>{
   renderGrid(currentFilter(), e.target.value);
 });
 
-function selectSize(id, size, btn){
-  selectedSizes[id] = size;
-  document.querySelectorAll(`#sizes-${id} .size-chip`).forEach(c=>c.classList.remove("selected"));
-  btn.classList.add("selected");
-}
-
-function addToCart(id){
-  const product = PRODUCTS.find(p=>p.id===id);
-  if(!product.inStock) return;
-  if(product.sizes.length && !selectedSizes[id]){
-    alert("Please select a size first.");
-    return;
-  }
-  const size = selectedSizes[id] || null;
-  const existing = CART.find(i=>i.id===id && i.size===size);
-  if(existing){ existing.qty += 1; } else { CART.push({...product, qty:1, size}); }
-  saveCart();
-  showToast(`${product.name} added to cart`);
+function enquire(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p || !p.inStock) return;
+  const msg = `Hi! I'm interested in: ${p.name}${p.category ? " ("+p.category+")" : ""}. Could you share the price and availability?`;
+  showToast("Opening WhatsApp…");
+  window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
 }
 
 const toastEl = document.getElementById("toast");
@@ -584,165 +354,23 @@ function showToast(msg){
   toastEl.textContent = msg;
   toastEl.classList.add("show");
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>toastEl.classList.remove("show"), 1800);
+  toastTimer = setTimeout(()=>toastEl.classList.remove("show"), 1600);
 }
 
-function changeQty(cartIndex, delta){
-  const item = CART[cartIndex];
-  if(!item) return;
-  item.qty += delta;
-  if(item.qty <= 0) CART.splice(cartIndex,1);
-  saveCart();
+/* ---- tabs ---- */
+function showTab(name){
+  document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+  document.getElementById(`tab-${name}`).classList.add("active");
+  document.querySelector(`.tab-btn[data-tab="${name}"]`).classList.add("active");
+  window.scrollTo({top:0, behavior:"smooth"});
 }
-
-function removeItem(cartIndex){
-  CART.splice(cartIndex,1);
-  saveCart();
-}
-
-function saveCart(){
-  localStorage.setItem("ne_cart", JSON.stringify(CART));
-  renderCart();
-}
-
-function renderCart(){
-  const body = document.getElementById("cartBody");
-  const countEl = document.getElementById("cartCount");
-  const totalEl = document.getElementById("cartTotal");
-  const orderRefEl = document.getElementById("orderRef");
-  const totalQty = CART.reduce((s,i)=>s+i.qty,0);
-  countEl.textContent = totalQty;
-  orderRefEl.textContent = CART.length ? `Ref: ${ORDER_NUMBER}` : "";
-  if(!CART.length){
-    body.innerHTML = `<p style="font-size:13px;color:var(--text-dim2);">Your cart is empty.</p>`;
-    totalEl.textContent = "₹0";
-    return;
-  }
-  body.innerHTML = CART.map((i,idx) => `
-    <div class="cart-item">
-      <img src="${i.image}" onerror="this.src='https://placehold.co/100x120/EEEEEE/111111?text=NE'">
-      <div class="cart-item-info">
-        <div class="cart-item-name">${i.name}</div>
-        <div class="cart-item-meta">₹${i.price}${i.size ? " · Size " + i.size : ""}</div>
-        <div class="qty-row">
-          <button class="qty-btn" onclick="changeQty(${idx},-1)">−</button>
-          <span style="font-size:13px;">${i.qty}</span>
-          <button class="qty-btn" onclick="changeQty(${idx},1)">+</button>
-          <button class="remove-link" onclick="removeItem(${idx})">remove</button>
-        </div>
-      </div>
-    </div>
-  `).join("");
-  const total = CART.reduce((s,i)=>s+i.price*i.qty,0);
-  totalEl.textContent = "₹" + total;
-}
-
-/* ---- customer details ---- */
-const custNameEl = document.getElementById("custName");
-const custMobileEl = document.getElementById("custMobile");
-const custAddressEl = document.getElementById("custAddress");
-const locBtn = document.getElementById("locBtn");
-const locStatus = document.getElementById("locStatus");
-let savedLocation = null;
-
-(function loadSavedCustomer(){
-  const saved = JSON.parse(localStorage.getItem("ne_customer") || "{}");
-  if(saved.name) custNameEl.value = saved.name;
-  if(saved.mobile) custMobileEl.value = saved.mobile;
-  if(saved.address) custAddressEl.value = saved.address;
-})();
-
-function saveCustomer(){
-  localStorage.setItem("ne_customer", JSON.stringify({
-    name: custNameEl.value.trim(),
-    mobile: custMobileEl.value.trim(),
-    address: custAddressEl.value.trim()
-  }));
-}
-
-locBtn.addEventListener("click", ()=>{
-  if(!navigator.geolocation){
-    locStatus.textContent = "Location not supported on this device.";
-    return;
-  }
-  locStatus.textContent = "Getting location…";
-  navigator.geolocation.getCurrentPosition(
-    (pos)=>{
-      savedLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-      locStatus.textContent = "✓ Location added";
-    },
-    ()=>{ locStatus.textContent = "Couldn't get location — you can skip this."; },
-    { timeout: 8000 }
-  );
+document.querySelectorAll(".tab-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>showTab(btn.dataset.tab));
 });
-
-function validateCustomerFields(){
-  let ok = true;
-  [custNameEl, custMobileEl, custAddressEl].forEach(el=>el.classList.remove("field-error"));
-  if(!custNameEl.value.trim()){ custNameEl.classList.add("field-error"); ok = false; }
-  if(!/^\d{10}$/.test(custMobileEl.value.trim())){ custMobileEl.classList.add("field-error"); ok = false; }
-  if(!custAddressEl.value.trim()){ custAddressEl.classList.add("field-error"); ok = false; }
-  return ok;
-}
-
-function buildWhatsAppMessage(){
-  if(!CART.length) return "Hi! I'd like to place an order.";
-  let lines = [`Order Ref: ${ORDER_NUMBER}`, "Hi! I'd like to order:", ""];
-  CART.forEach(i=>{
-    lines.push(`• ${i.name}${i.size ? " (Size "+i.size+")" : ""}${i.type ? " ["+i.type+"]" : ""} x${i.qty} — ₹${i.price*i.qty}`);
-  });
-  const total = CART.reduce((s,i)=>s+i.price*i.qty,0);
-  lines.push("", `Total: ₹${total}`, "");
-  lines.push(`Name: ${custNameEl.value.trim()}`);
-  lines.push(`Mobile: ${custMobileEl.value.trim()}`);
-  lines.push(`Address: ${custAddressEl.value.trim()}`);
-  if(savedLocation){
-    lines.push(`Location: https://maps.google.com/?q=${savedLocation.lat},${savedLocation.lng}`);
-  }
-  return lines.join("\n");
-}
-
-/* drawer controls */
-const overlay = document.getElementById("overlay");
-const drawer = document.getElementById("drawer");
-function openDrawer(){ overlay.classList.add("open"); drawer.classList.add("open"); }
-function closeDrawer(){ overlay.classList.remove("open"); drawer.classList.remove("open"); }
-document.getElementById("cartOpenBtn").addEventListener("click", openDrawer);
-document.getElementById("closeDrawerBtn").addEventListener("click", closeDrawer);
-overlay.addEventListener("click", closeDrawer);
-
-document.getElementById("waCheckoutBtn").addEventListener("click", ()=>{
-  if(!CART.length){ return; }
-  if(!validateCustomerFields()){
-    alert("Please fill in your name, a valid 10-digit mobile number, and address before sending.");
-    return;
-  }
-  saveCustomer();
-  const msg = encodeURIComponent(buildWhatsAppMessage());
-  window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${msg}`, "_blank");
-});
-
-document.getElementById("copyBtn").addEventListener("click", ()=>{
-  if(!CART.length) return;
-  if(!validateCustomerFields()){
-    alert("Please fill in your name, a valid 10-digit mobile number, and address first.");
-    return;
-  }
-  saveCustomer();
-  const text = buildWhatsAppMessage();
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(text).then(()=>alert("Order text copied!"));
-  } else {
-    const ta = document.createElement("textarea");
-    ta.value = text; document.body.appendChild(ta); ta.select();
-    document.execCommand("copy"); document.body.removeChild(ta);
-    alert("Order text copied!");
-  }
-});
-
-document.getElementById("waDirectBtn").addEventListener("click", (e)=>{
+document.getElementById("goProductsBtn").addEventListener("click", (e)=>{
   e.preventDefault();
-  window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}`, "_blank");
+  showTab("products");
 });
 
 /* ---- dark mode ---- */
@@ -762,23 +390,6 @@ themeToggleBtn.addEventListener("click", ()=>{
   applyTheme(current === "dark" ? "light" : "dark");
 });
 
-/* ---- tabs ---- */
-function showTab(name){
-  document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));
-  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
-  document.getElementById(`tab-${name}`).classList.add("active");
-  document.querySelector(`.tab-btn[data-tab="${name}"]`).classList.add("active");
-  window.scrollTo({top:0, behavior:"smooth"});
-}
-document.querySelectorAll(".tab-btn").forEach(btn=>{
-  btn.addEventListener("click", ()=>showTab(btn.dataset.tab));
-});
-document.getElementById("goProductsBtn").addEventListener("click", (e)=>{
-  e.preventDefault();
-  showTab("products");
-});
-
-renderCart();
 loadProducts();
 </script>
 </body>
